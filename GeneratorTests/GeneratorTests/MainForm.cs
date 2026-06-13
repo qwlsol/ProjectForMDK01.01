@@ -324,8 +324,28 @@ namespace GeneratorTests
 
         private void btnFinishTest_Click(object sender, EventArgs e)
         {
-            
+            if (_activeResult == null)
+            {
+                MessageBox.Show("Нет активного теста");
+                return;
+            }
+
+            _activeResult.CalculateScore(_currentTest);
+            _currentUser.AddTestResult(_activeResult);
+
+            string resultMessage = "Тест завершён!\n";
+            resultMessage += "Ваш результат: " + _activeResult.Score + " из " + _activeResult.MaxScore + "\n";
+            resultMessage += "Процент: " + (_activeResult.Score * 100 / _activeResult.MaxScore) + "%";
+
+            MessageBox.Show(resultMessage);
+
+            _activeResult = null;
+            currentQuestionIndex = 0;
+            txtAnswer.Text = "";
+
+            ShowResults();
         }
+        
         private string ConvertLetterToAnswer(Question q, string letter)
         {
             letter = letter.Trim().ToLower();
