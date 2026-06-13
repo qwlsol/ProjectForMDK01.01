@@ -202,7 +202,24 @@ namespace GeneratorTests
                             currentText = temp;
                         }
                     }
-                }
+                    else if (isOptions)
+                    {
+                        string optsText = "";
+                        for (int k = 9; k < cleanedLine.Length; k++)
+                        {
+                            optsText = optsText + cleanedLine[k];
+                        }
+                        if (optsText.Length > 0 && optsText[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < optsText.Length; k++)
+                            {
+                                temp = temp + optsText[k];
+                            }
+                            optsText = temp;
+                        }
+
+                    }
         }
     }
 }
