@@ -255,5 +255,51 @@ namespace GeneratorTests
 
             return letter;
         }
+        private string ConvertLettersToAnswer(Question q, string letters)
+        {
+            List<string> answerLetters = new List<string>();
+            string currentLetter = "";
+            for (int k = 0; k < letters.Length; k++)
+            {
+                if (letters[k] == ',')
+                {
+                    if (currentLetter != "")
+                    {
+                        answerLetters.Add(currentLetter);
+                        currentLetter = "";
+                    }
+                }
+                else
+                {
+                    currentLetter = currentLetter + letters[k];
+                }
+            }
+            if (currentLetter != "")
+            {
+                answerLetters.Add(currentLetter);
+            }
+
+            List<string> answers = new List<string>();
+            for (int i = 0; i < answerLetters.Count; i++)
+            {
+                string letter = answerLetters[i];
+                if (letter == "a" && q.Options.Count > 0) answers.Add(q.Options[0]);
+                else if (letter == "b" && q.Options.Count > 1) answers.Add(q.Options[1]);
+                else if (letter == "c" && q.Options.Count > 2) answers.Add(q.Options[2]);
+                else if (letter == "d" && q.Options.Count > 3) answers.Add(q.Options[3]);
+                else answers.Add(letter);
+            }
+
+            string result = "";
+            for (int i = 0; i < answers.Count; i++)
+            {
+                result = result + answers[i];
+                if (i < answers.Count - 1)
+                {
+                    result = result + ",";
+                }
+            }
+            return result;
+        }
     }
 }
