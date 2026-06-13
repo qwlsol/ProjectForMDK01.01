@@ -50,6 +50,18 @@ namespace GeneratorTests
                             break;
                         }
                     }
+                    for (int k = line.Length - 1; k >= 0; k--)
+                    {
+                        if (line[k] != ' ')
+                        {
+                            endIndex = k;
+                            break;
+                        }
+                    }
+                    for (int k = startIndex; k <= endIndex; k++)
+                    {
+                        cleanedLine = cleanedLine + line[k];
+                    }
                 }
 
 
