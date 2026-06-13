@@ -237,8 +237,90 @@ namespace GeneratorTests
 
         private void btnSubmitAnswer_Click(object sender, EventArgs e)
         {
+           
+                if (_activeResult == null)
+                {
+                    MessageBox.Show("Сначала начните тест");
+                    return;
+                }
 
+                if (currentQuestionIndex < _currentTest.Questions.Count)
+                {
+                    Question q = _currentTest.Questions[currentQuestionIndex];
+
+                    string userAnswer = txtAnswer.Text;
+                    string cleanedAnswer = "";
+                    int startIdx = 0;
+                    int endIdx = userAnswer.Length - 1;
+
+                    for (int k = 0; k < userAnswer.Length; k++)
+                    {
+                        if (userAnswer[k] != ' ')
+                        {
+                            startIdx = k;
+                            break;
+                        }
+                    }
+                    for (int k = userAnswer.Length - 1; k >= 0; k--)
+                    {
+                        if (userAnswer[k] != ' ')
+                        {
+                            endIdx = k;
+                            break;
+                        }
+                    }
+                    for (int k = startIdx; k <= endIdx; k++)
+                    {
+                        cleanedAnswer = cleanedAnswer + userAnswer[k];
+                    }
+
+                    string lowerAnswer = "";
+                    for (int k = 0; k < cleanedAnswer.Length; k++)
+                    {
+                        char c = cleanedAnswer[k];
+                        if (c >= 'A' && c <= 'Z')
+                        {
+                            lowerAnswer = lowerAnswer + (char)(c + 32);
+                        }
+                        else
+                        {
+                            lowerAnswer = lowerAnswer + c;
+                        }
+                    }
+
+                    userAnswer = lowerAnswer;
+
+                    if (userAnswer == "")
+                    {
+                        MessageBox.Show("Введите ответ");
+                        return;
+                    }
+
+                    string finalAnswer = userAnswer;
+
+                    if (q.Type == QuestionType.Single)
+                    {
+                        finalAnswer = ConvertLetterToAnswer(q, userAnswer);
+                    }
+                    else if (q.Type == QuestionType.Multiple)
+                    {
+                        finalAnswer = ConvertLettersToAnswer(q, userAnswer);
+                    }
+
+                    _activeResult.SetAnswer(q.Id, finalAnswer);
+                    currentQuestionIndex++;
+
+                    if (currentQuestionIndex < _currentTest.Questions.Count)
+                    {
+                        ShowQuestion(currentQuestionIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Все вопросы пройдены! Нажмите 'Завершить'");
+                    }
+                }
         }
+        
 
         private void btnFinishTest_Click(object sender, EventArgs e)
         {
