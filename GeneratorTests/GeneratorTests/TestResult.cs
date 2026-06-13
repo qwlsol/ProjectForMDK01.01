@@ -24,5 +24,16 @@ namespace GeneratorTests
             Answers = new Dictionary<int, string>();
             Timestamp = DateTime.Now;
         }
+        public void SetAnswer(int questionId, string answer)
+        {
+            if (Answers.ContainsKey(questionId))
+            {
+                Answers[questionId] = answer;
+            }
+            else
+            {
+                Answers.Add(questionId, answer);
+            }
+        }
     }
 }
