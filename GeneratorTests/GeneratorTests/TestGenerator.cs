@@ -403,12 +403,42 @@ namespace GeneratorTests
             }
             return result;
         }
+        public List<Test> GenerateVariants(string tema, int kolichestvoVariants, int voprosovVVariante)
+        {
+            List<Question> available = GetQuestionsByTopic(tema);
+            int totalNeeded = kolichestvoVariants * voprosovVVariante;
+
+            if (available.Count < totalNeeded)
+            {
+                MessageBox.Show("Ошибка! Для создания " + kolichestvoVariants + " вариантов по " + voprosovVVariante +
+                               " вопросов требуется " + totalNeeded + " уникальных вопросов. " +
+                               "В теме \"" + tema + "\" доступно только " + available.Count + ". Создание невозможно.");
+                return new List<Test>();
+            }
+
+            List<Question> tempPool = new List<Question>();
+            for (int i = 0; i < available.Count; i++)
+            {
+                tempPool.Add(available[i]);
+            }
+
+            List<Test> variants = new List<Test>();
+
+            for (int v = 0; v < kolichestvoVariants; v++)
+            {
+                List<Question> variantQuestions = new List<Question>();
+
+                for (int q = 0; q < voprosovVVariante; q++)
+                {
+                    int idx = _random.Next(0, tempPool.Count);
+                    variantQuestions.Add(tempPool[idx]);
+                    tempPool.RemoveAt(idx);
+                }
+
+                variants.Add(new Test(v + 1, "Вариант " + (v + 1), variantQuestions));
+            }
+
+            return variants;
+        }
     }
-                        
-
-
-                    
-        
-    
 }
-
