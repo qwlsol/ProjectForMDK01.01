@@ -100,6 +100,76 @@ namespace GeneratorTests
                     {
                         isTopic = true;
                     }
+                    if (cleanedLine.Length >= 7 &&
+                        cleanedLine[0] == 'В' &&
+                        cleanedLine[1] == 'о' &&
+                        cleanedLine[2] == 'п' &&
+                        cleanedLine[3] == 'р' &&
+                        cleanedLine[4] == 'о' &&
+                        cleanedLine[5] == 'с' &&
+                        cleanedLine[6] == ':')
+                    {
+                        isQuestion = true;
+                    }
+                    if (cleanedLine.Length >= 9 &&
+                        cleanedLine[0] == 'В' &&
+                        cleanedLine[1] == 'а' &&
+                        cleanedLine[2] == 'р' &&
+                        cleanedLine[3] == 'и' &&
+                        cleanedLine[4] == 'а' &&
+                        cleanedLine[5] == 'н' &&
+                        cleanedLine[6] == 'т' &&
+                        cleanedLine[7] == 'ы' &&
+                        cleanedLine[8] == ':')
+                    {
+                        isOptions = true;
+                    }
+                    if (cleanedLine.Length >= 18 &&
+                        cleanedLine[0] == 'П' &&
+                        cleanedLine[1] == 'р' &&
+                        cleanedLine[2] == 'а' &&
+                        cleanedLine[3] == 'в' &&
+                        cleanedLine[4] == 'и' &&
+                        cleanedLine[5] == 'л' &&
+                        cleanedLine[6] == 'ь' &&
+                        cleanedLine[7] == 'н' &&
+                        cleanedLine[8] == 'ы' &&
+                        cleanedLine[9] == 'й' &&
+                        cleanedLine[10] == ' ' &&
+                        cleanedLine[11] == 'о' &&
+                        cleanedLine[12] == 'т' &&
+                        cleanedLine[13] == 'в' &&
+                        cleanedLine[14] == 'е' &&
+                        cleanedLine[15] == 'т' &&
+                        cleanedLine[16] == ':' &&
+                        cleanedLine[17] == ' ')
+                    {
+                        isCorrect = true;
+                    }
+                    // "Тип:"
+                    if (cleanedLine.Length >= 4 &&
+                        cleanedLine[0] == 'Т' &&
+                        cleanedLine[1] == 'и' &&
+                        cleanedLine[2] == 'п' &&
+                        cleanedLine[3] == ':')
+                    {
+                        isType = true;
+                    }
+                    // "Сложность:"
+                    if (cleanedLine.Length >= 10 &&
+                        cleanedLine[0] == 'С' &&
+                        cleanedLine[1] == 'л' &&
+                        cleanedLine[2] == 'о' &&
+                        cleanedLine[3] == 'ж' &&
+                        cleanedLine[4] == 'н' &&
+                        cleanedLine[5] == 'о' &&
+                        cleanedLine[6] == 'с' &&
+                        cleanedLine[7] == 'т' &&
+                        cleanedLine[8] == 'ь' &&
+                        cleanedLine[9] == ':')
+                    {
+                        isDifficulty = true;
+                    }
 
                 }
         }
