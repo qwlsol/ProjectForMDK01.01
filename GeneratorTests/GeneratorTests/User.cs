@@ -29,5 +29,9 @@ namespace GeneratorTests
             Role = role;
             TestResults = new List<TestResult>();
         }
+        public void AddTestResult(TestResult result)
+        {
+            TestResults.Add(result);
+        }
     }
 }
