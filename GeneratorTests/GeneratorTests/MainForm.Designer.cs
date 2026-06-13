@@ -203,6 +203,7 @@
             this.btnSaveWord.Size = new System.Drawing.Size(80, 30);
             this.btnSaveWord.TabIndex = 35;
             this.btnSaveWord.Text = "Сохранить";
+            this.btnSaveWord.Click += new System.EventHandler(this.btnSaveWord_Click);
             // 
             // btnEditQuestion
             // 
