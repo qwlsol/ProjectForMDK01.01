@@ -34,6 +34,25 @@ namespace GeneratorTests
                 string currentDifficulty = "";
                 string currentType = "одиночный";
                 List<string> currentOptions = new List<string>();
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string line = lines[i];
+
+                    string cleanedLine = "";
+                    int startIndex = 0;
+                    int endIndex = line.Length - 1;
+
+                    for (int k = 0; k < line.Length; k++)
+                    {
+                        if (line[k] != ' ')
+                        {
+                            startIndex = k;
+                            break;
+                        }
+                    }
+                }
+
+
             }
         }
     }
