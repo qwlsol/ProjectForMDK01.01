@@ -22,5 +22,17 @@ namespace GeneratorTests
         {
             Questions.Add(question);
         }
+        public bool RemoveQuestion(int questionId)
+        {
+            for (int i = 0; i < Questions.Count; i++)
+            {
+                if (Questions[i].Id == questionId)
+                {
+                    Questions.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
