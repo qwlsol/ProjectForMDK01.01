@@ -33,5 +33,17 @@ namespace GeneratorTests
         {
             TestResults.Add(result);
         }
+        public double GetAverageScore()
+        {
+            if (TestResults.Count == 0)
+                return 0;
+
+            int sum = 0;
+            for (int i = 0; i < TestResults.Count; i++)
+            {
+                sum = sum + TestResults[i].Score;
+            }
+            return (double)sum / TestResults.Count;
+        }
     }
 }
