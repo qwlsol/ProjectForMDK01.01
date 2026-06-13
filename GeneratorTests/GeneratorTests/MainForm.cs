@@ -64,5 +64,33 @@ namespace GeneratorTests
             UpdateUiByRole();
             MessageBox.Show("Вы вошли как СТУДЕНТ");
         }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (_currentUser.Role != UserRole.Teacher)
+            {
+                MessageBox.Show("Только преподаватель может загружать вопросы");
+                return;
+            }
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Текстовые файлы|*.txt";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (_generator.LoadFromFile(ofd.FileName))
+                {
+                    List<string> topics = _generator.GetTopics();
+                    cmbTopics.Items.Clear();
+                    foreach (string topic in topics)
+                    {
+                        cmbTopics.Items.Add(topic);
+                    }
+                    if (cmbTopics.Items.Count > 0)
+                        cmbTopics.SelectedIndex = 0;
+                }
+            }
+        }
+    
     }
 }

@@ -185,6 +185,7 @@
             this.btnLoad.Size = new System.Drawing.Size(80, 30);
             this.btnLoad.TabIndex = 32;
             this.btnLoad.Text = "Загрузить";
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // btnGenerateVariants
             // 
