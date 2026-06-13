@@ -391,6 +391,18 @@ namespace GeneratorTests
             }
             return topics;
         }
+        public List<Question> GetQuestionsByTopic(string topic)
+        {
+            List<Question> result = new List<Question>();
+            for (int i = 0; i < _allQuestions.Count; i++)
+            {
+                if (_allQuestions[i].Topic == topic)
+                {
+                    result.Add(_allQuestions[i]);
+                }
+            }
+            return result;
+        }
     }
                         
 
