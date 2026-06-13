@@ -91,6 +91,16 @@ namespace GeneratorTests
                     bool isType = false;
                     bool isDifficulty = false;
 
+                    if (cleanedLine.Length >= 5 &&
+                        cleanedLine[0] == 'Т' &&
+                        cleanedLine[1] == 'е' &&
+                        cleanedLine[2] == 'м' &&
+                        cleanedLine[3] == 'а' &&
+                        cleanedLine[4] == ':')
+                    {
+                        isTopic = true;
+                    }
+
                 }
         }
     }
