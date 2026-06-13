@@ -167,6 +167,7 @@
             this.btnLoginTeacher.Size = new System.Drawing.Size(100, 30);
             this.btnLoginTeacher.TabIndex = 30;
             this.btnLoginTeacher.Text = "Вход (учитель)";
+            this.btnLoginTeacher.Click += new System.EventHandler(this.btnLoginTeacher_Click);
             // 
             // btnLoginStudent
             // 

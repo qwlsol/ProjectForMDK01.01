@@ -51,5 +51,12 @@ namespace GeneratorTests
                 txtAnswer.Enabled = true;
             }
         }
+
+        private void btnLoginTeacher_Click(object sender, EventArgs e)
+        {
+            _currentUser = new User(1, "teacher", "123", UserRole.Teacher);
+            UpdateUiByRole();
+            MessageBox.Show("Вы вошли как ПРЕПОДАВАТЕЛЬ");
+        }
     }
 }
