@@ -239,7 +239,23 @@ namespace GeneratorTests
                                                 break;
                                             }
                                         }
+                                        for (int m = currentOption.Length - 1; m >= 0; m--)
+                                        {
+                                            if (currentOption[m] != ' ')
+                                            {
+                                                optEnd = m;
+                                                break;
+                                            }
+                                        }
+                                        for (int m = optStart; m <= optEnd; m++)
+                                        {
+                                            cleanOpt = cleanOpt + currentOption[m];
+                                        }
+                                        currentOptions.Add(cleanOpt);
+                                        currentOption = "";
                                     }
+                                }
+                            }
                         }
 
 
