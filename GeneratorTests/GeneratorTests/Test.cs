@@ -34,5 +34,16 @@ namespace GeneratorTests
             }
             return false;
         }
+        public Question GetQuestionById(int id)
+        {
+            for (int i = 0; i < Questions.Count; i++)
+            {
+                if (Questions[i].Id == id)
+                {
+                    return Questions[i];
+                }
+            }
+            return null;
+        }
     }
 }
