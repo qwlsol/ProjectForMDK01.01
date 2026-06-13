@@ -170,5 +170,50 @@ namespace GeneratorTests
             }
             MessageBox.Show("Редактирование вопроса");
         }
+
+        private void btnStartTest_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void ShowQuestion(int index)
+        {
+            Question q = _currentTest.Questions[index];
+            listBoxQuestions.Items.Clear();
+            listBoxQuestions.Items.Add("Вопрос " + (index + 1) + " из " + _currentTest.Questions.Count);
+            listBoxQuestions.Items.Add("");
+            listBoxQuestions.Items.Add(q.Text);
+            listBoxQuestions.Items.Add("");
+            listBoxQuestions.Items.Add("Тип вопроса: " + GetTypeName(q.Type));
+
+            if (q.Type == QuestionType.Single || q.Type == QuestionType.Multiple)
+            {
+                listBoxQuestions.Items.Add("");
+                listBoxQuestions.Items.Add("Варианты ответов:");
+                for (int j = 0; j < q.Options.Count; j++)
+                {
+                    char letter = (char)(65 + j);
+                    listBoxQuestions.Items.Add("   " + letter + ") " + q.Options[j]);
+                }
+
+                if (q.Type == QuestionType.Single)
+                {
+                    listBoxQuestions.Items.Add("");
+                    listBoxQuestions.Items.Add("Введите букву правильного ответа (например: a)");
+                }
+                else
+                {
+                    listBoxQuestions.Items.Add("");
+                    listBoxQuestions.Items.Add("Введите буквы правильных ответов через запятую (например: a,b)");
+                }
+            }
+            else
+            {
+                listBoxQuestions.Items.Add("");
+                listBoxQuestions.Items.Add("Введите текстовый ответ:");
+            }
+
+            txtAnswer.Text = "";
+            txtAnswer.Focus();
+        }
     }
 }

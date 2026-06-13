@@ -221,6 +221,7 @@
             this.btnStartTest.Size = new System.Drawing.Size(100, 30);
             this.btnStartTest.TabIndex = 37;
             this.btnStartTest.Text = "Начать тест";
+            this.btnStartTest.Click += new System.EventHandler(this.btnStartTest_Click);
             // 
             // btnSubmitAnswer
             // 
