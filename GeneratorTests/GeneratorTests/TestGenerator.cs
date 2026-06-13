@@ -306,6 +306,23 @@ namespace GeneratorTests
                             currentCorrect = temp;
                         }
                     }
+                    else if (isType)
+                    {
+                        currentType = "";
+                        for (int k = 4; k < cleanedLine.Length; k++)
+                        {
+                            currentType = currentType + cleanedLine[k];
+                        }
+                        if (currentType.Length > 0 && currentType[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < currentType.Length; k++)
+                            {
+                                temp = temp + currentType[k];
+                            }
+                            currentType = temp;
+                        }
+                    }
                 }
                         
 
