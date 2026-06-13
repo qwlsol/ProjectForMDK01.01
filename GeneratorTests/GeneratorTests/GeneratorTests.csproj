@@ -57,6 +57,7 @@
     <Compile Include="Question.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TestGenerator.cs" />
+    <Compile Include="TestResult.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
