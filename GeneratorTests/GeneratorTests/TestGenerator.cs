@@ -11,5 +11,11 @@ namespace GeneratorTests
         private List<Question> _allQuestions = new List<Question>();
         private Random _random = new Random();
         private int _nextId = 1;
+
+        public bool LoadFromFile(string path)
+        {
+
+
+        }
     }
 }
