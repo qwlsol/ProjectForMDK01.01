@@ -341,6 +341,14 @@ namespace GeneratorTests
                         }
                     }
                 }
+                if (currentText != "")
+                {
+                    SaveQuestion(currentTopic, currentText, currentCorrect,
+                        currentDifficulty, currentType, currentOptions);
+                }
+
+                MessageBox.Show("Загружено " + _allQuestions.Count + " вопросов");
+                return _allQuestions.Count > 0;
             }
                         
 
