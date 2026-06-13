@@ -244,5 +244,16 @@ namespace GeneratorTests
         {
 
         }
+        private string ConvertLetterToAnswer(Question q, string letter)
+        {
+            letter = letter.Trim().ToLower();
+
+            if (letter == "a" && q.Options.Count > 0) return q.Options[0];
+            if (letter == "b" && q.Options.Count > 1) return q.Options[1];
+            if (letter == "c" && q.Options.Count > 2) return q.Options[2];
+            if (letter == "d" && q.Options.Count > 3) return q.Options[3];
+
+            return letter;
+        }
     }
 }
