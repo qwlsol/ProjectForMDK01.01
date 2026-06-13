@@ -144,21 +144,21 @@ namespace GeneratorTests
 
         private void btnSaveWord_Click(object sender, EventArgs e)
         {
-                if (_currentTest == null)
-                {
-                    MessageBox.Show("Сначала создайте тест");
-                    return;
-                }
+            if (_currentTest == null)
+            {
+                MessageBox.Show("Сначала создайте тест");
+                return;
+            }
 
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "Word документы|*.docx";
-                sfd.FileName = "Тест";
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Word документы|*.docx";
+            sfd.FileName = "Тест";
 
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    string path = sfd.FileName.Replace(".docx", "");
-                    _exporter.SaveVariantsToWord(path, new List<Test> { _currentTest });
-                }
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string path = sfd.FileName.Replace(".docx", "");
+                _exporter.SaveVariantsToWord(path, new List<Test> { _currentTest });
+            }
         }
 
         private void btnEditQuestion_Click(object sender, EventArgs e)
@@ -237,94 +237,94 @@ namespace GeneratorTests
 
         private void btnSubmitAnswer_Click(object sender, EventArgs e)
         {
-           
-                if (_activeResult == null)
+
+            if (_activeResult == null)
+            {
+                MessageBox.Show("Сначала начните тест");
+                return;
+            }
+
+            if (currentQuestionIndex < _currentTest.Questions.Count)
+            {
+                Question q = _currentTest.Questions[currentQuestionIndex];
+
+                string userAnswer = txtAnswer.Text;
+                string cleanedAnswer = "";
+                int startIdx = 0;
+                int endIdx = userAnswer.Length - 1;
+
+                for (int k = 0; k < userAnswer.Length; k++)
                 {
-                    MessageBox.Show("Сначала начните тест");
-                    return;
+                    if (userAnswer[k] != ' ')
+                    {
+                        startIdx = k;
+                        break;
+                    }
+                }
+                for (int k = userAnswer.Length - 1; k >= 0; k--)
+                {
+                    if (userAnswer[k] != ' ')
+                    {
+                        endIdx = k;
+                        break;
+                    }
+                }
+                for (int k = startIdx; k <= endIdx; k++)
+                {
+                    cleanedAnswer = cleanedAnswer + userAnswer[k];
                 }
 
-                if (currentQuestionIndex < _currentTest.Questions.Count)
+                string lowerAnswer = "";
+                for (int k = 0; k < cleanedAnswer.Length; k++)
                 {
-                    Question q = _currentTest.Questions[currentQuestionIndex];
-
-                    string userAnswer = txtAnswer.Text;
-                    string cleanedAnswer = "";
-                    int startIdx = 0;
-                    int endIdx = userAnswer.Length - 1;
-
-                    for (int k = 0; k < userAnswer.Length; k++)
+                    char c = cleanedAnswer[k];
+                    if (c >= 'A' && c <= 'Z')
                     {
-                        if (userAnswer[k] != ' ')
-                        {
-                            startIdx = k;
-                            break;
-                        }
-                    }
-                    for (int k = userAnswer.Length - 1; k >= 0; k--)
-                    {
-                        if (userAnswer[k] != ' ')
-                        {
-                            endIdx = k;
-                            break;
-                        }
-                    }
-                    for (int k = startIdx; k <= endIdx; k++)
-                    {
-                        cleanedAnswer = cleanedAnswer + userAnswer[k];
-                    }
-
-                    string lowerAnswer = "";
-                    for (int k = 0; k < cleanedAnswer.Length; k++)
-                    {
-                        char c = cleanedAnswer[k];
-                        if (c >= 'A' && c <= 'Z')
-                        {
-                            lowerAnswer = lowerAnswer + (char)(c + 32);
-                        }
-                        else
-                        {
-                            lowerAnswer = lowerAnswer + c;
-                        }
-                    }
-
-                    userAnswer = lowerAnswer;
-
-                    if (userAnswer == "")
-                    {
-                        MessageBox.Show("Введите ответ");
-                        return;
-                    }
-
-                    string finalAnswer = userAnswer;
-
-                    if (q.Type == QuestionType.Single)
-                    {
-                        finalAnswer = ConvertLetterToAnswer(q, userAnswer);
-                    }
-                    else if (q.Type == QuestionType.Multiple)
-                    {
-                        finalAnswer = ConvertLettersToAnswer(q, userAnswer);
-                    }
-
-                    _activeResult.SetAnswer(q.Id, finalAnswer);
-                    currentQuestionIndex++;
-
-                    if (currentQuestionIndex < _currentTest.Questions.Count)
-                    {
-                        ShowQuestion(currentQuestionIndex);
+                        lowerAnswer = lowerAnswer + (char)(c + 32);
                     }
                     else
                     {
-                        MessageBox.Show("Все вопросы пройдены! Нажмите 'Завершить'");
+                        lowerAnswer = lowerAnswer + c;
                     }
                 }
+
+                userAnswer = lowerAnswer;
+
+                if (userAnswer == "")
+                {
+                    MessageBox.Show("Введите ответ");
+                    return;
+                }
+
+                string finalAnswer = userAnswer;
+
+                if (q.Type == QuestionType.Single)
+                {
+                    finalAnswer = ConvertLetterToAnswer(q, userAnswer);
+                }
+                else if (q.Type == QuestionType.Multiple)
+                {
+                    finalAnswer = ConvertLettersToAnswer(q, userAnswer);
+                }
+
+                _activeResult.SetAnswer(q.Id, finalAnswer);
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < _currentTest.Questions.Count)
+                {
+                    ShowQuestion(currentQuestionIndex);
+                }
+                else
+                {
+                    MessageBox.Show("Все вопросы пройдены! Нажмите 'Завершить'");
+                }
+            }
         }
-        
+
 
         private void btnFinishTest_Click(object sender, EventArgs e)
         {
-
+            
         }
         private string ConvertLetterToAnswer(Question q, string letter)
         {
@@ -382,6 +382,23 @@ namespace GeneratorTests
                 }
             }
             return result;
+        }
+        private void ShowResults()
+        {
+            if (_currentUser.TestResults.Count > 0)
+            {
+                listBoxQuestions.Items.Clear();
+                listBoxQuestions.Items.Add("МОИ РЕЗУЛЬТАТЫ");
+                listBoxQuestions.Items.Add("");
+                for (int i = 0; i < _currentUser.TestResults.Count; i++)
+                {
+                    TestResult tr = _currentUser.TestResults[i];
+                    listBoxQuestions.Items.Add((i + 1) + ". Тест от " + tr.Timestamp.ToShortDateString());
+                    listBoxQuestions.Items.Add("   Баллы: " + tr.Score + " / " + tr.MaxScore);
+                    listBoxQuestions.Items.Add("");
+                }
+                listBoxQuestions.Items.Add("Средний балл: " + _currentUser.GetAverageScore());
+            }
         }
     }
 }
