@@ -21,6 +21,35 @@ namespace GeneratorTests
         public MainForm()
         {
             InitializeComponent();
+            _generator = new TestGenerator();
+            _exporter = new WordExporter();
+
+            _currentUser = new User(1, "teacher", "123", UserRole.Teacher);
+            UpdateUiByRole();
+        }
+        private void UpdateUiByRole()
+        {
+            if (_currentUser.Role == UserRole.Teacher)
+            {
+                btnEditQuestion.Enabled = true;
+                btnLoad.Enabled = true;
+                btnGenerateVariants.Enabled = true;
+                btnSaveWord.Enabled = true;
+                lableInput.Enabled = false;
+                txtAnswer.Enabled = false;
+                lblStatus.Text = "Режим: Преподаватель";
+
+            }
+            else
+            {
+                btnEditQuestion.Enabled = false;
+                btnLoad.Enabled = false;
+                btnGenerateVariants.Enabled = false;
+                btnSaveWord.Enabled = false;
+                lableInput.Enabled = true;
+                lblStatus.Text = "Режим: Студент";
+                txtAnswer.Enabled = true;
+            }
         }
     }
 }
