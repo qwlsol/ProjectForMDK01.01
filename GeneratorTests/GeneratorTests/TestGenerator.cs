@@ -218,6 +218,11 @@ namespace GeneratorTests
                             }
                             optsText = temp;
                         }
+                        currentOptions = new List<string>();
+                        if (optsText != "")
+                        {
+
+                        }    
 
                     }
         }
