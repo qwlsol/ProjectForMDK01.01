@@ -14,5 +14,18 @@ namespace GeneratorTests
 
     public class User
     {
+        public int Id { get; set; }
+        public string Login { get; set; }
+        public string PasswordHash { get; set; }
+        public UserRole Role { get; set; }
+       
+
+        public User(int id, string login, string passwordHash, UserRole role)
+        {
+            Id = id;
+            Login = login;
+            PasswordHash = passwordHash;
+            Role = role;
+        }
     }
 }
