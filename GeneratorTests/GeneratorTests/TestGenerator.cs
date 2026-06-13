@@ -323,7 +323,25 @@ namespace GeneratorTests
                             currentType = temp;
                         }
                     }
+                    else if (isDifficulty)
+                    {
+                        currentDifficulty = "";
+                        for (int k = 10; k < cleanedLine.Length; k++)
+                        {
+                            currentDifficulty = currentDifficulty + cleanedLine[k];
+                        }
+                        if (currentDifficulty.Length > 0 && currentDifficulty[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < currentDifficulty.Length; k++)
+                            {
+                                temp = temp + currentDifficulty[k];
+                            }
+                            currentDifficulty = temp;
+                        }
+                    }
                 }
+            }
                         
 
 
