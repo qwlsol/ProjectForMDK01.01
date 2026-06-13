@@ -255,7 +255,12 @@ namespace GeneratorTests
                                         currentOption = "";
                                     }
                                 }
+                                else
+                                {
+                                    currentOption = currentOption + optsText[k];
+                                }
                             }
+                        }
                         }
 
 
