@@ -58,5 +58,11 @@ namespace GeneratorTests
             UpdateUiByRole();
             MessageBox.Show("Вы вошли как ПРЕПОДАВАТЕЛЬ");
         }
+        private void btnLoginStudent_Click(object sender, EventArgs e)
+        {
+            _currentUser = new User(2, "student", "123", UserRole.Student);
+            UpdateUiByRole();
+            MessageBox.Show("Вы вошли как СТУДЕНТ");
+        }
     }
 }
