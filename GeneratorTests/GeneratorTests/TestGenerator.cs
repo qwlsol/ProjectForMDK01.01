@@ -146,7 +146,6 @@ namespace GeneratorTests
                     {
                         isCorrect = true;
                     }
-                    // "Тип:"
                     if (cleanedLine.Length >= 4 &&
                         cleanedLine[0] == 'Т' &&
                         cleanedLine[1] == 'и' &&
@@ -155,7 +154,6 @@ namespace GeneratorTests
                     {
                         isType = true;
                     }
-                    // "Сложность:"
                     if (cleanedLine.Length >= 10 &&
                         cleanedLine[0] == 'С' &&
                         cleanedLine[1] == 'л' &&
