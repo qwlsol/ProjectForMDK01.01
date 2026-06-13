@@ -185,7 +185,23 @@ namespace GeneratorTests
                             currentTopic = temp;
                         }
                     }
-
+                    else if (isQuestion)
+                    {
+                        currentText = "";
+                        for (int k = 7; k < cleanedLine.Length; k++)
+                        {
+                            currentText = currentText + cleanedLine[k];
+                        }
+                        if (currentText.Length > 0 && currentText[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < currentText.Length; k++)
+                            {
+                                temp = temp + currentText[k];
+                            }
+                            currentText = temp;
+                        }
+                    }
                 }
         }
     }
