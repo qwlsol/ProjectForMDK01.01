@@ -221,8 +221,12 @@ namespace GeneratorTests
                         currentOptions = new List<string>();
                         if (optsText != "")
                         {
+                            string currentOption = "";
+                            for (int k = 0; k < optsText.Length; k++)
+                            {
+                            }
+                        }
 
-                        }    
 
                     }
         }
