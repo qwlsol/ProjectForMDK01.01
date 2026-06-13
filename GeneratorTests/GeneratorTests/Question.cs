@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace GeneratorTests
 {
-    internal class Question
+    public enum QuestionType
+    {
+        Single,
+        Multiple,
+        Text
+    }
+    public class Question
     {
     }
 }

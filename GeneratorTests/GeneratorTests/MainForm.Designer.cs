@@ -40,7 +40,6 @@
             this.btnLoginTeacher = new System.Windows.Forms.Button();
             this.btnLoginStudent = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
-            this.btnGenerateTest = new System.Windows.Forms.Button();
             this.btnGenerateVariants = new System.Windows.Forms.Button();
             this.btnSaveWord = new System.Windows.Forms.Button();
             this.btnEditQuestion = new System.Windows.Forms.Button();
@@ -58,7 +57,7 @@
             // 
             this.lableInput.AutoSize = true;
             this.lableInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lableInput.Location = new System.Drawing.Point(425, 398);
+            this.lableInput.Location = new System.Drawing.Point(426, 429);
             this.lableInput.Name = "lableInput";
             this.lableInput.Size = new System.Drawing.Size(113, 18);
             this.lableInput.TabIndex = 43;
@@ -66,7 +65,7 @@
             // 
             // lblTopic
             // 
-            this.lblTopic.Location = new System.Drawing.Point(70, -23);
+            this.lblTopic.Location = new System.Drawing.Point(14, 14);
             this.lblTopic.Name = "lblTopic";
             this.lblTopic.Size = new System.Drawing.Size(50, 20);
             this.lblTopic.TabIndex = 22;
@@ -74,7 +73,7 @@
             // 
             // lblDifficulty
             // 
-            this.lblDifficulty.Location = new System.Drawing.Point(270, -23);
+            this.lblDifficulty.Location = new System.Drawing.Point(214, 14);
             this.lblDifficulty.Name = "lblDifficulty";
             this.lblDifficulty.Size = new System.Drawing.Size(70, 20);
             this.lblDifficulty.TabIndex = 23;
@@ -82,7 +81,7 @@
             // 
             // lblQuestions
             // 
-            this.lblQuestions.Location = new System.Drawing.Point(440, -23);
+            this.lblQuestions.Location = new System.Drawing.Point(384, 14);
             this.lblQuestions.Name = "lblQuestions";
             this.lblQuestions.Size = new System.Drawing.Size(70, 20);
             this.lblQuestions.TabIndex = 24;
@@ -90,7 +89,7 @@
             // 
             // lblVariants
             // 
-            this.lblVariants.Location = new System.Drawing.Point(590, -23);
+            this.lblVariants.Location = new System.Drawing.Point(534, 14);
             this.lblVariants.Name = "lblVariants";
             this.lblVariants.Size = new System.Drawing.Size(70, 20);
             this.lblVariants.TabIndex = 25;
@@ -99,7 +98,7 @@
             // cmbTopics
             // 
             this.cmbTopics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTopics.Location = new System.Drawing.Point(130, -25);
+            this.cmbTopics.Location = new System.Drawing.Point(74, 12);
             this.cmbTopics.Name = "cmbTopics";
             this.cmbTopics.Size = new System.Drawing.Size(120, 21);
             this.cmbTopics.TabIndex = 26;
@@ -112,14 +111,14 @@
             "лёгкий",
             "средний",
             "сложный"});
-            this.cmbDifficulty.Location = new System.Drawing.Point(340, -25);
+            this.cmbDifficulty.Location = new System.Drawing.Point(284, 12);
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(80, 21);
             this.cmbDifficulty.TabIndex = 27;
             // 
             // numQuestions
             // 
-            this.numQuestions.Location = new System.Drawing.Point(510, -25);
+            this.numQuestions.Location = new System.Drawing.Point(454, 12);
             this.numQuestions.Maximum = new decimal(new int[] {
             30,
             0,
@@ -141,7 +140,7 @@
             // 
             // numVariants
             // 
-            this.numVariants.Location = new System.Drawing.Point(660, -25);
+            this.numVariants.Location = new System.Drawing.Point(604, 12);
             this.numVariants.Maximum = new decimal(new int[] {
             10,
             0,
@@ -163,7 +162,7 @@
             // 
             // btnLoginTeacher
             // 
-            this.btnLoginTeacher.Location = new System.Drawing.Point(12, 10);
+            this.btnLoginTeacher.Location = new System.Drawing.Point(13, 41);
             this.btnLoginTeacher.Name = "btnLoginTeacher";
             this.btnLoginTeacher.Size = new System.Drawing.Size(100, 30);
             this.btnLoginTeacher.TabIndex = 30;
@@ -171,7 +170,7 @@
             // 
             // btnLoginStudent
             // 
-            this.btnLoginStudent.Location = new System.Drawing.Point(122, 10);
+            this.btnLoginStudent.Location = new System.Drawing.Point(123, 41);
             this.btnLoginStudent.Name = "btnLoginStudent";
             this.btnLoginStudent.Size = new System.Drawing.Size(100, 30);
             this.btnLoginStudent.TabIndex = 31;
@@ -179,23 +178,15 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(232, 10);
+            this.btnLoad.Location = new System.Drawing.Point(233, 41);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(80, 30);
             this.btnLoad.TabIndex = 32;
             this.btnLoad.Text = "Загрузить";
             // 
-            // btnGenerateTest
-            // 
-            this.btnGenerateTest.Location = new System.Drawing.Point(322, 10);
-            this.btnGenerateTest.Name = "btnGenerateTest";
-            this.btnGenerateTest.Size = new System.Drawing.Size(80, 30);
-            this.btnGenerateTest.TabIndex = 33;
-            this.btnGenerateTest.Text = "Тест";
-            // 
             // btnGenerateVariants
             // 
-            this.btnGenerateVariants.Location = new System.Drawing.Point(412, 10);
+            this.btnGenerateVariants.Location = new System.Drawing.Point(324, 41);
             this.btnGenerateVariants.Name = "btnGenerateVariants";
             this.btnGenerateVariants.Size = new System.Drawing.Size(80, 30);
             this.btnGenerateVariants.TabIndex = 34;
@@ -203,7 +194,7 @@
             // 
             // btnSaveWord
             // 
-            this.btnSaveWord.Location = new System.Drawing.Point(502, 10);
+            this.btnSaveWord.Location = new System.Drawing.Point(414, 41);
             this.btnSaveWord.Name = "btnSaveWord";
             this.btnSaveWord.Size = new System.Drawing.Size(80, 30);
             this.btnSaveWord.TabIndex = 35;
@@ -211,7 +202,7 @@
             // 
             // btnEditQuestion
             // 
-            this.btnEditQuestion.Location = new System.Drawing.Point(592, 10);
+            this.btnEditQuestion.Location = new System.Drawing.Point(504, 41);
             this.btnEditQuestion.Name = "btnEditQuestion";
             this.btnEditQuestion.Size = new System.Drawing.Size(80, 30);
             this.btnEditQuestion.TabIndex = 36;
@@ -219,7 +210,7 @@
             // 
             // btnStartTest
             // 
-            this.btnStartTest.Location = new System.Drawing.Point(12, 390);
+            this.btnStartTest.Location = new System.Drawing.Point(13, 421);
             this.btnStartTest.Name = "btnStartTest";
             this.btnStartTest.Size = new System.Drawing.Size(100, 30);
             this.btnStartTest.TabIndex = 37;
@@ -227,7 +218,7 @@
             // 
             // btnSubmitAnswer
             // 
-            this.btnSubmitAnswer.Location = new System.Drawing.Point(122, 390);
+            this.btnSubmitAnswer.Location = new System.Drawing.Point(123, 421);
             this.btnSubmitAnswer.Name = "btnSubmitAnswer";
             this.btnSubmitAnswer.Size = new System.Drawing.Size(100, 30);
             this.btnSubmitAnswer.TabIndex = 38;
@@ -235,7 +226,7 @@
             // 
             // btnFinishTest
             // 
-            this.btnFinishTest.Location = new System.Drawing.Point(232, 390);
+            this.btnFinishTest.Location = new System.Drawing.Point(233, 421);
             this.btnFinishTest.Name = "btnFinishTest";
             this.btnFinishTest.Size = new System.Drawing.Size(100, 30);
             this.btnFinishTest.TabIndex = 39;
@@ -244,14 +235,14 @@
             // txtAnswer
             // 
             this.txtAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtAnswer.Location = new System.Drawing.Point(544, 391);
+            this.txtAnswer.Location = new System.Drawing.Point(545, 422);
             this.txtAnswer.Name = "txtAnswer";
             this.txtAnswer.Size = new System.Drawing.Size(128, 29);
             this.txtAnswer.TabIndex = 41;
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(12, 430);
+            this.lblStatus.Location = new System.Drawing.Point(13, 461);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(660, 40);
             this.lblStatus.TabIndex = 42;
@@ -260,7 +251,7 @@
             // 
             this.listBoxQuestions.Font = new System.Drawing.Font("Courier New", 9F);
             this.listBoxQuestions.ItemHeight = 15;
-            this.listBoxQuestions.Location = new System.Drawing.Point(12, 50);
+            this.listBoxQuestions.Location = new System.Drawing.Point(13, 81);
             this.listBoxQuestions.Name = "listBoxQuestions";
             this.listBoxQuestions.Size = new System.Drawing.Size(660, 319);
             this.listBoxQuestions.TabIndex = 40;
@@ -282,7 +273,6 @@
             this.Controls.Add(this.btnLoginTeacher);
             this.Controls.Add(this.btnLoginStudent);
             this.Controls.Add(this.btnLoad);
-            this.Controls.Add(this.btnGenerateTest);
             this.Controls.Add(this.btnGenerateVariants);
             this.Controls.Add(this.btnSaveWord);
             this.Controls.Add(this.btnEditQuestion);
@@ -315,7 +305,6 @@
         private System.Windows.Forms.Button btnLoginTeacher;
         private System.Windows.Forms.Button btnLoginStudent;
         private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.Button btnGenerateTest;
         private System.Windows.Forms.Button btnGenerateVariants;
         private System.Windows.Forms.Button btnSaveWord;
         private System.Windows.Forms.Button btnEditQuestion;
