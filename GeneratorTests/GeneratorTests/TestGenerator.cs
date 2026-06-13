@@ -260,11 +260,40 @@ namespace GeneratorTests
                                     currentOption = currentOption + optsText[k];
                                 }
                             }
+                            if (currentOption != "")
+                            {
+                                string cleanOpt = "";
+                                int optStart = 0;
+                                int optEnd = currentOption.Length - 1;
+                                for (int m = 0; m < currentOption.Length; m++)
+                                {
+                                    if (currentOption[m] != ' ')
+                                    {
+                                        optStart = m;
+                                        break;
+                                    }
+                                }
+                                for (int m = currentOption.Length - 1; m >= 0; m--)
+                                {
+                                    if (currentOption[m] != ' ')
+                                    {
+                                        optEnd = m;
+                                        break;
+                                    }
+                                }
+                                for (int m = optStart; m <= optEnd; m++)
+                                {
+                                    cleanOpt = cleanOpt + currentOption[m];
+                                }
+                                currentOptions.Add(cleanOpt);
+                            }
                         }
-                        }
-
-
                     }
+                }
+                        
+
+
+                    
         }
     }
 }
