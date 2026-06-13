@@ -230,6 +230,7 @@
             this.btnSubmitAnswer.Size = new System.Drawing.Size(100, 30);
             this.btnSubmitAnswer.TabIndex = 38;
             this.btnSubmitAnswer.Text = "Ответить";
+            this.btnSubmitAnswer.Click += new System.EventHandler(this.btnSubmitAnswer_Click);
             // 
             // btnFinishTest
             // 
@@ -238,6 +239,7 @@
             this.btnFinishTest.Size = new System.Drawing.Size(100, 30);
             this.btnFinishTest.TabIndex = 39;
             this.btnFinishTest.Text = "Завершить";
+            this.btnFinishTest.Click += new System.EventHandler(this.btnFinishTest_Click);
             // 
             // txtAnswer
             // 

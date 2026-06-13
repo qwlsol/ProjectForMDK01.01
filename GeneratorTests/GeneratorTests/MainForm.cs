@@ -173,7 +173,26 @@ namespace GeneratorTests
 
         private void btnStartTest_Click(object sender, EventArgs e)
         {
-            
+            if (_currentUser.Role != UserRole.Student)
+            {
+                MessageBox.Show("Только студент может проходить тесты. Войдите как студент");
+                return;
+            }
+
+            if (_currentTest == null)
+            {
+                MessageBox.Show("Сначала преподаватель должен создать тест");
+                return;
+            }
+
+            _activeResult = new TestResult(_currentTest.Id, _currentUser.Id, _currentTest.Questions.Count);
+            currentQuestionIndex = 0;
+            MessageBox.Show("Тест начат. Отвечайте на вопросы");
+
+            if (_currentTest.Questions.Count > 0)
+            {
+                ShowQuestion(0);
+            }
         }
         private void ShowQuestion(int index)
         {
@@ -214,6 +233,16 @@ namespace GeneratorTests
 
             txtAnswer.Text = "";
             txtAnswer.Focus();
+        }
+
+        private void btnSubmitAnswer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFinishTest_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
