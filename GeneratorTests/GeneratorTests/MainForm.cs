@@ -160,5 +160,15 @@ namespace GeneratorTests
                     _exporter.SaveVariantsToWord(path, new List<Test> { _currentTest });
                 }
         }
+
+        private void btnEditQuestion_Click(object sender, EventArgs e)
+        {
+            if (_currentUser.Role != UserRole.Teacher)
+            {
+                MessageBox.Show("Только преподаватель может редактировать вопросы");
+                return;
+            }
+            MessageBox.Show("Редактирование вопроса");
+        }
     }
 }

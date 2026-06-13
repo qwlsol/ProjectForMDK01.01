@@ -212,6 +212,7 @@
             this.btnEditQuestion.Size = new System.Drawing.Size(80, 30);
             this.btnEditQuestion.TabIndex = 36;
             this.btnEditQuestion.Text = "Ред.";
+            this.btnEditQuestion.Click += new System.EventHandler(this.btnEditQuestion_Click);
             // 
             // btnStartTest
             // 
