@@ -18,7 +18,8 @@ namespace GeneratorTests
         public string Login { get; set; }
         public string PasswordHash { get; set; }
         public UserRole Role { get; set; }
-       
+
+        public List<TestResult> TestResults { get; set; }
 
         public User(int id, string login, string passwordHash, UserRole role)
         {
@@ -26,6 +27,7 @@ namespace GeneratorTests
             Login = login;
             PasswordHash = passwordHash;
             Role = role;
+            TestResults = new List<TestResult>();
         }
     }
 }
