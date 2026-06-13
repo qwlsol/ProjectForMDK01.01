@@ -62,6 +62,21 @@ namespace GeneratorTests
                     {
                         cleanedLine = cleanedLine + line[k];
                     }
+                    if (cleanedLine == "")
+                    {
+                        if (currentText != "")
+                        {
+                            SaveQuestion(currentTopic, currentText, currentCorrect,
+                                currentDifficulty, currentType, currentOptions);
+                            currentText = "";
+                            currentTopic = "";
+                            currentCorrect = "";
+                            currentDifficulty = "";
+                            currentType = "одиночный";
+                            currentOptions = new List<string>();
+                        }
+                        continue;
+                    }
                 }
 
 
