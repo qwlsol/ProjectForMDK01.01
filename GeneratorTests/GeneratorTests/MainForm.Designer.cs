@@ -194,6 +194,7 @@
             this.btnGenerateVariants.Size = new System.Drawing.Size(80, 30);
             this.btnGenerateVariants.TabIndex = 34;
             this.btnGenerateVariants.Text = "Варианты";
+            this.btnGenerateVariants.Click += new System.EventHandler(this.btnGenerateVariants_Click);
             // 
             // btnSaveWord
             // 

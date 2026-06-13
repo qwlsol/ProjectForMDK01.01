@@ -98,5 +98,48 @@ namespace GeneratorTests
             return "текстовый ввод";
         }
 
+        private void btnGenerateVariants_Click(object sender, EventArgs e)
+        {
+            if (_currentUser.Role != UserRole.Teacher)
+            {
+                MessageBox.Show("Только преподаватель может создавать варианты");
+                return;
+            }
+
+            if (cmbTopics.SelectedIndex == -1)
+            {
+                MessageBox.Show("Сначала загрузите файл с вопросами");
+                return;
+            }
+
+            string topic = cmbTopics.SelectedItem.ToString();
+            int variantCount = (int)numVariants.Value;
+            int questionsCount = (int)numQuestions.Value;
+
+            List<Test> variants = _generator.GenerateVariants(topic, variantCount, questionsCount);
+
+            if (variants.Count > 0)
+            {
+                _currentTest = variants[0];
+                listBoxQuestions.Items.Clear();
+
+                for (int v = 0; v < variants.Count; v++)
+                {
+                    listBoxQuestions.Items.Add("--" + variants[v].Title + "--");
+                    listBoxQuestions.Items.Add("");
+                    for (int i = 0; i < variants[v].Questions.Count; i++)
+                    {
+                        Question q = variants[v].Questions[i];
+                        listBoxQuestions.Items.Add((i + 1) + ". " + q.Text);
+                        listBoxQuestions.Items.Add("   [Тип: " + GetTypeName(q.Type) + "]");
+                        listBoxQuestions.Items.Add("   [Сложность: " + q.Difficulty + "]");
+                        listBoxQuestions.Items.Add("");
+                    }
+                    listBoxQuestions.Items.Add("");
+                }
+
+                MessageBox.Show("Создано " + variants.Count + " вариантов");
+            }
+        }
     }
 }
