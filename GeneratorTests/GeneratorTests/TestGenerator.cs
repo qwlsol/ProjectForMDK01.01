@@ -224,7 +224,22 @@ namespace GeneratorTests
                             string currentOption = "";
                             for (int k = 0; k < optsText.Length; k++)
                             {
-                            }
+                                if (optsText[k] == ';')
+                                {
+                                    if (currentOption != "")
+                                    {
+                                        string cleanOpt = "";
+                                        int optStart = 0;
+                                        int optEnd = currentOption.Length - 1;
+                                        for (int m = 0; m < currentOption.Length; m++)
+                                        {
+                                            if (currentOption[m] != ' ')
+                                            {
+                                                optStart = m;
+                                                break;
+                                            }
+                                        }
+                                    }
                         }
 
 
