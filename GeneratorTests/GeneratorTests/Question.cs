@@ -21,5 +21,17 @@ namespace GeneratorTests
         public string CorrectAnswer { get; set; }
         public List<string> Options { get; set; }
         public QuestionType Type { get; set; }
+
+        public Question(int id, string text, string topic, string difficulty,
+                       string correctAnswer, List<string> options, QuestionType type)
+        {
+            Id = id;
+            Text = text;
+            Topic = topic;
+            Difficulty = difficulty;
+            CorrectAnswer = correctAnswer;
+            Options = options;
+            Type = type;
+        }
     }
 }
