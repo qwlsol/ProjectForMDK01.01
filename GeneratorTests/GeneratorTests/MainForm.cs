@@ -12,6 +12,12 @@ namespace GeneratorTests
 {
     public partial class MainForm : Form
     {
+        private TestGenerator _generator;
+        private WordExporter _exporter;
+        private User _currentUser;
+        private Test _currentTest;
+        private TestResult _activeResult;
+        private int currentQuestionIndex = 0;
         public MainForm()
         {
             InitializeComponent();
