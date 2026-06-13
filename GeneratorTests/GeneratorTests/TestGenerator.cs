@@ -289,6 +289,23 @@ namespace GeneratorTests
                             }
                         }
                     }
+                    else if (isCorrect)
+                    {
+                        currentCorrect = "";
+                        for (int k = 18; k < cleanedLine.Length; k++)
+                        {
+                            currentCorrect = currentCorrect + cleanedLine[k];
+                        }
+                        if (currentCorrect.Length > 0 && currentCorrect[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < currentCorrect.Length; k++)
+                            {
+                                temp = temp + currentCorrect[k];
+                            }
+                            currentCorrect = temp;
+                        }
+                    }
                 }
                         
 
