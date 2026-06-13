@@ -350,11 +350,18 @@ namespace GeneratorTests
                 MessageBox.Show("Загружено " + _allQuestions.Count + " вопросов");
                 return _allQuestions.Count > 0;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+                return false;
+            }
+        }
+    }
                         
 
 
                     
-        }
-    }
+        
+    
 }
 
