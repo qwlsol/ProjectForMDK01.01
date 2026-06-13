@@ -18,5 +18,9 @@ namespace GeneratorTests
             Title = title;
             Questions = questions;
         }
+        public void AddQuestion(Question question)
+        {
+            Questions.Add(question);
+        }
     }
 }
