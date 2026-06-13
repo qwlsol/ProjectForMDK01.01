@@ -28,7 +28,14 @@ namespace GeneratorTests
                     MessageBox.Show("Файл пуст. Добавьте вопросы.");
                     return false;
                 }
-
+                string currentTopic = "";
+                string currentText = "";
+                string currentCorrect = "";
+                string currentDifficulty = "";
+                string currentType = "одиночный";
+                List<string> currentOptions = new List<string>();
             }
+        }
     }
 }
+
