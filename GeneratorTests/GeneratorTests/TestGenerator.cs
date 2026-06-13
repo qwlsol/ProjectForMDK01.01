@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GeneratorTests
 {
@@ -14,8 +16,19 @@ namespace GeneratorTests
 
         public bool LoadFromFile(string path)
         {
+            try
+            {
+                _allQuestions.Clear();
+                _nextId = 1;
 
+                string[] lines = File.ReadAllLines(path);
 
-        }
+                if (lines.Length == 0)
+                {
+                    MessageBox.Show("Файл пуст. Добавьте вопросы.");
+                    return false;
+                }
+
+            }
     }
 }
