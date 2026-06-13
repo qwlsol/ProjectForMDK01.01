@@ -356,6 +356,19 @@ namespace GeneratorTests
                 return false;
             }
         }
+        private void SaveQuestion(string topic, string text, string correct,
+           string difficulty, string type, List<string> options)
+        {
+            QuestionType qt = QuestionType.Single;
+            if (type == "множественный")
+                qt = QuestionType.Multiple;
+            else if (type == "текстовый")
+                qt = QuestionType.Text;
+
+            Question q = new Question(_nextId, text, topic, difficulty, correct, options, qt);
+            _allQuestions.Add(q);
+            _nextId++;
+        }
     }
                         
 
