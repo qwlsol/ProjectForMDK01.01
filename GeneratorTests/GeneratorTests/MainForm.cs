@@ -91,6 +91,12 @@ namespace GeneratorTests
                 }
             }
         }
-    
+        private string GetTypeName(QuestionType type)
+        {
+            if (type == QuestionType.Single) return "одиночный выбор";
+            if (type == QuestionType.Multiple) return "множественный выбор";
+            return "текстовый ввод";
+        }
+
     }
 }
