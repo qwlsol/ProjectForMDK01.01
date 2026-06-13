@@ -35,5 +35,20 @@ namespace GeneratorTests
                 Answers.Add(questionId, answer);
             }
         }
+        public void CalculateScore(Test test)
+        {
+            int correct = 0;
+
+            foreach (KeyValuePair<int, string> item in Answers)
+            {
+                Question q = test.GetQuestionById(item.Key);
+                if (q != null && q.CorrectAnswer == item.Value)
+                {
+                    correct++;
+                }
+            }
+
+            Score = correct;
+        }
     }
 }
