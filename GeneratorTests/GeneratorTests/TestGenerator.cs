@@ -168,6 +168,23 @@ namespace GeneratorTests
                     {
                         isDifficulty = true;
                     }
+                    if (isTopic)
+                    {
+                        currentTopic = "";
+                        for (int k = 5; k < cleanedLine.Length; k++)
+                        {
+                            currentTopic = currentTopic + cleanedLine[k];
+                        }
+                        if (currentTopic.Length > 0 && currentTopic[0] == ' ')
+                        {
+                            string temp = "";
+                            for (int k = 1; k < currentTopic.Length; k++)
+                            {
+                                temp = temp + currentTopic[k];
+                            }
+                            currentTopic = temp;
+                        }
+                    }
 
                 }
         }
