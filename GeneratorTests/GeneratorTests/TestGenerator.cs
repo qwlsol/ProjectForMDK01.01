@@ -40,12 +40,10 @@ namespace GeneratorTests
                 {
                     string line = lines[i];
 
-                    // Убираем пробелы вручную (вместо Trim)
                     string cleanedLine = "";
                     int startIndex = 0;
                     int endIndex = line.Length - 1;
 
-                    // Убираем пробелы в начале
                     for (int k = 0; k < line.Length; k++)
                     {
                         if (line[k] != ' ')
@@ -54,7 +52,6 @@ namespace GeneratorTests
                             break;
                         }
                     }
-                    // Убираем пробелы в конце
                     for (int k = line.Length - 1; k >= 0; k--)
                     {
                         if (line[k] != ' ')
