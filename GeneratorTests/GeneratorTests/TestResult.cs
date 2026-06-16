@@ -47,7 +47,7 @@ namespace GeneratorTests
                     correct++;
                 }
             }
-            
+
             Score = correct;
         }
     }
