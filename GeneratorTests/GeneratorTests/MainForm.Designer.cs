@@ -140,7 +140,7 @@
             // 
             // numVariants
             // 
-            this.numVariants.Location = new System.Drawing.Point(604, 12);
+            this.numVariants.Location = new System.Drawing.Point(610, 12);
             this.numVariants.Maximum = new decimal(new int[] {
             10,
             0,
