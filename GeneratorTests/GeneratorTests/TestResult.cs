@@ -50,5 +50,7 @@ namespace GeneratorTests
 
             Score = correct;
         }
+
     }
+
 }
