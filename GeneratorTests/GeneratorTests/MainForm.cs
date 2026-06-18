@@ -298,13 +298,14 @@ namespace GeneratorTests
 
                 string finalAnswer = userAnswer;
 
+                // ИСПРАВЛЕНО: вызываем методы из TestResult
                 if (q.Type == QuestionType.Single)
                 {
-                    finalAnswer = ConvertLetterToAnswer(q, userAnswer);
+                    finalAnswer = _activeResult.ConvertLetterToAnswer(q, userAnswer);
                 }
                 else if (q.Type == QuestionType.Multiple)
                 {
-                    finalAnswer = ConvertLettersToAnswer(q, userAnswer);
+                    finalAnswer = _activeResult.ConvertLettersToAnswer(q, userAnswer);
                 }
 
                 _activeResult.SetAnswer(q.Id, finalAnswer);
@@ -343,82 +344,12 @@ namespace GeneratorTests
             currentQuestionIndex = 0;
             txtAnswer.Text = "";
 
-            ShowResults();
-        }
+            // ИСПРАВЛЕНО: вызываем метод из User
+            listBoxQuestions.Items.Clear();
+            listBoxQuestions.Items.Add(_currentUser.GetFormattedResults());
         
-        private string ConvertLetterToAnswer(Question q, string letter)
-        {
-            letter = letter.Trim().ToLower();
-
-            if (letter == "a" && q.Options.Count > 0) return q.Options[0];
-            if (letter == "b" && q.Options.Count > 1) return q.Options[1];
-            if (letter == "c" && q.Options.Count > 2) return q.Options[2];
-            if (letter == "d" && q.Options.Count > 3) return q.Options[3];
-
-            return letter;
         }
-        private string ConvertLettersToAnswer(Question q, string letters)
-        {
-            List<string> answerLetters = new List<string>();
-            string currentLetter = "";
-            for (int k = 0; k < letters.Length; k++)
-            {
-                if (letters[k] == ',')
-                {
-                    if (currentLetter != "")
-                    {
-                        answerLetters.Add(currentLetter);
-                        currentLetter = "";
-                    }
-                }
-                else
-                {
-                    currentLetter = currentLetter + letters[k];
-                }
-            }
-            if (currentLetter != "")
-            {
-                answerLetters.Add(currentLetter);
-            }
 
-            List<string> answers = new List<string>();
-            for (int i = 0; i < answerLetters.Count; i++)
-            {
-                string letter = answerLetters[i];
-                if (letter == "a" && q.Options.Count > 0) answers.Add(q.Options[0]);
-                else if (letter == "b" && q.Options.Count > 1) answers.Add(q.Options[1]);
-                else if (letter == "c" && q.Options.Count > 2) answers.Add(q.Options[2]);
-                else if (letter == "d" && q.Options.Count > 3) answers.Add(q.Options[3]);
-                else answers.Add(letter);
-            }
-
-            string result = "";
-            for (int i = 0; i < answers.Count; i++)
-            {
-                result = result + answers[i];
-                if (i < answers.Count - 1)
-                {
-                    result = result + ",";
-                }
-            }
-            return result;
-        }
-        private void ShowResults()
-        {
-            if (_currentUser.TestResults.Count > 0)
-            {
-                listBoxQuestions.Items.Clear();
-                listBoxQuestions.Items.Add("МОИ РЕЗУЛЬТАТЫ");
-                listBoxQuestions.Items.Add("");
-                for (int i = 0; i < _currentUser.TestResults.Count; i++)
-                {
-                    TestResult tr = _currentUser.TestResults[i];
-                    listBoxQuestions.Items.Add((i + 1) + ". Тест от " + tr.Timestamp.ToShortDateString());
-                    listBoxQuestions.Items.Add("   Баллы: " + tr.Score + " / " + tr.MaxScore);
-                    listBoxQuestions.Items.Add("");
-                }
-                listBoxQuestions.Items.Add("Средний балл: " + _currentUser.GetAverageScore());
-            }
-        }
+    
     }
 }
