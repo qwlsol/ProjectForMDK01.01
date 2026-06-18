@@ -45,5 +45,22 @@ namespace GeneratorTests
             }
             return (double)sum / TestResults.Count;
         }
+        public string GetFormattedResults()
+        {
+            if (TestResults.Count == 0)
+                return "Нет пройденных тестов";
+
+            string result = "МОИ РЕЗУЛЬТАТЫ\n\n";
+            for (int i = 0; i < TestResults.Count; i++)
+            {
+                TestResult tr = TestResults[i];
+                result += (i + 1) + ". Тест от " + tr.Timestamp.ToShortDateString() + "\n";
+                result += "   Баллы: " + tr.Score + " / " + tr.MaxScore + "\n\n";
+            }
+            result += "Средний балл: " + GetAverageScore();
+            return result;
+        }
     }
 }
+    
+
