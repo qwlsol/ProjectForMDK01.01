@@ -12,6 +12,7 @@ namespace GeneratorTests
         private string _connectionString =
             "Host=localhost;Username=postgres;Password=123;Database=generator_tests";
 
+        
         private void CreateTables()
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
@@ -237,6 +238,13 @@ namespace GeneratorTests
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+        private void CreateDefaultUsers()
+        {
+            if (!ValidateUser("teacher", "123", out _))
+                AddUser("teacher", "123", UserRole.Teacher);
+            if (!ValidateUser("student", "123", out _))
+                AddUser("student", "123", UserRole.Student);
         }
     }
 }
