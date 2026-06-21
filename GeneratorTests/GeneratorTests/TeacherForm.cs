@@ -67,5 +67,43 @@ namespace GeneratorTests
                 }
             }   
         }
+
+        private void btnGenerateVariants_Click(object sender, EventArgs e)
+        {
+            if (cmbTopics.SelectedIndex == -1)
+            {
+                MessageBox.Show("Выберите тему");
+                return;
+            }
+
+            string topic = cmbTopics.SelectedItem.ToString();
+            int variants = (int)numVariants.Value;
+            int questions = (int)numQuestions.Value;
+
+            List<Test> tests = _generator.GenerateVariants(topic, variants, questions);
+
+            if (tests.Count > 0)
+            {
+                _currentTest = tests[0];
+                listBoxQuestions.Items.Clear();
+
+                foreach (Test test in tests)
+                {
+                    listBoxQuestions.Items.Add($"-- {test.Title} --");
+                    listBoxQuestions.Items.Add("");
+                    for (int i = 0; i < test.Questions.Count; i++)
+                    {
+                        Question q = test.Questions[i];
+                        listBoxQuestions.Items.Add($"{i + 1}. {q.Text}");
+                        listBoxQuestions.Items.Add($"   [Тип: {GetTypeName(q.Type)}]");
+                        listBoxQuestions.Items.Add($"   [Сложность: {q.Difficulty}]");
+                        listBoxQuestions.Items.Add("");
+                    }
+                    listBoxQuestions.Items.Add("");
+                }
+
+                MessageBox.Show($"Создано {tests.Count} вариантов");
+            }
+        }
     }
 }

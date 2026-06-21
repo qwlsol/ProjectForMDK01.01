@@ -151,6 +151,7 @@
             this.btnGenerateVariants.TabIndex = 9;
             this.btnGenerateVariants.Text = "Варианты";
             this.btnGenerateVariants.UseVisualStyleBackColor = true;
+            this.btnGenerateVariants.Click += new System.EventHandler(this.btnGenerateVariants_Click);
             // 
             // btnSaveWord
             // 
