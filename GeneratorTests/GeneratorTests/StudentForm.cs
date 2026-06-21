@@ -12,6 +12,11 @@ namespace GeneratorTests
 {
     public partial class StudentForm : Form
     {
+        private DatabaseManager _db;
+        private User _user;
+        private Test _currentTest;
+        private TestResult _currentResult;
+        private int _currentIndex = 0;
         public StudentForm()
         {
             InitializeComponent();

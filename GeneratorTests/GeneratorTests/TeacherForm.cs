@@ -125,5 +125,15 @@ namespace GeneratorTests
             }
         }
 
+        private void btnEditQuestion_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Редактирование вопросов");
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

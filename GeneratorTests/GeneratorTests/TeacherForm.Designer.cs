@@ -171,6 +171,7 @@
             this.btnEditQuestion.TabIndex = 11;
             this.btnEditQuestion.Text = "Ред.";
             this.btnEditQuestion.UseVisualStyleBackColor = true;
+            this.btnEditQuestion.Click += new System.EventHandler(this.btnEditQuestion_Click);
             // 
             // btnExit
             // 
@@ -180,6 +181,7 @@
             this.btnExit.TabIndex = 12;
             this.btnExit.Text = "Выход";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // listBoxQuestions
             // 
