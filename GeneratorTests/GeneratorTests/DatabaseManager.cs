@@ -12,7 +12,11 @@ namespace GeneratorTests
         private string _connectionString =
             "Host=localhost;Username=postgres;Password=123;Database=generator_tests";
 
-        
+        public DatabaseManager()
+        {
+            CreateTables();
+            CreateDefaultUsers();
+        }
         private void CreateTables()
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
