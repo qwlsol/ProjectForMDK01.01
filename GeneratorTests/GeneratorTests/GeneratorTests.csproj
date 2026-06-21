@@ -133,6 +133,9 @@
     <Compile Include="TestResult.cs" />
     <Compile Include="User.cs" />
     <Compile Include="WordExporter.cs" />
+    <EmbeddedResource Include="ErrorReportForm.resx">
+      <DependentUpon>ErrorReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

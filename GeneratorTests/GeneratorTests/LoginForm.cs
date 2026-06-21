@@ -18,6 +18,9 @@ namespace GeneratorTests
         public LoginForm()
         {
             InitializeComponent();
+            
+                _db = new DatabaseManager();
+            
 
         }
 

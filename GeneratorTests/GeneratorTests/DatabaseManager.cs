@@ -1,22 +1,21 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GeneratorTests
 {
     public class DatabaseManager
     {
-        private string _connectionString =
-            "Host=localhost;Username=postgres;Password=123;Database=generator_tests";
+        private string _connectionString = "Host=localhost;Username=postgres;Password=123;Database=generator_tests";
 
         public DatabaseManager()
         {
-            CreateTables();
-            CreateDefaultUsers();
+                CreateTables();
+                CreateDefaultUsers();
+            
         }
+
         private void CreateTables()
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
@@ -53,6 +52,15 @@ namespace GeneratorTests
                 }
             }
         }
+
+        private void CreateDefaultUsers()
+        {
+            if (!ValidateUser("teacher", "123", out _))
+                AddUser("teacher", "123", UserRole.Teacher);
+            if (!ValidateUser("student", "123", out _))
+                AddUser("student", "123", UserRole.Student);
+        }
+
         public List<Question> LoadQuestions()
         {
             List<Question> questions = new List<Question>();
@@ -84,6 +92,7 @@ namespace GeneratorTests
             }
             return questions;
         }
+
         public void SaveQuestion(Question q)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
@@ -107,6 +116,7 @@ namespace GeneratorTests
                 }
             }
         }
+
         public void UpdateQuestion(Question q)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
@@ -131,6 +141,7 @@ namespace GeneratorTests
                 }
             }
         }
+
         public void DeleteQuestion(int id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
@@ -144,69 +155,7 @@ namespace GeneratorTests
                 }
             }
         }
-        private string GetHash(string password)
-        {
-            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-            {
-                byte[] bytes = System.Text.Encoding.ASCII.GetBytes(password);
-                byte[] hash = md5.ComputeHash(bytes);
 
-                string result = "";
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    result += hash[i].ToString("x2");
-                }
-                return result;
-            }
-        }
-        public List<TestResult> GetUserResults(int userId)
-        {
-            List<TestResult> results = new List<TestResult>();
-            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
-            {
-                conn.Open();
-                string sql = "SELECT * FROM TestResults WHERE UserId=@UserId ORDER BY Timestamp DESC";
-                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@UserId", userId);
-                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            TestResult tr = new TestResult(
-                                reader.GetInt32(2),
-                                reader.GetInt32(1),
-                                reader.GetInt32(4)
-                            );
-                            tr.Score = reader.GetInt32(3);
-                            tr.Timestamp = reader.GetDateTime(5);
-                            results.Add(tr);
-                        }
-                    }
-                }
-            }
-            return results;
-        }
-        public void SaveTestResult(TestResult result)
-        {
-            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
-            {
-                conn.Open();
-                string sql = @"
-                    INSERT INTO TestResults (UserId, TestId, Score, MaxScore, Timestamp)
-                    VALUES (@UserId, @TestId, @Score, @MaxScore, @Timestamp)
-                ";
-                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@UserId", result.UserId);
-                    cmd.Parameters.AddWithValue("@TestId", result.TestId);
-                    cmd.Parameters.AddWithValue("@Score", result.Score);
-                    cmd.Parameters.AddWithValue("@MaxScore", result.MaxScore);
-                    cmd.Parameters.AddWithValue("@Timestamp", result.Timestamp);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
         public bool ValidateUser(string login, string password, out UserRole role)
         {
             role = UserRole.Student;
@@ -249,14 +198,71 @@ namespace GeneratorTests
                 }
             }
         }
-        private void CreateDefaultUsers()
+
+        public List<TestResult> GetUserResults(int userId)
         {
-            if (!ValidateUser("teacher", "123", out _))
-                AddUser("teacher", "123", UserRole.Teacher);
-            if (!ValidateUser("student", "123", out _))
-                AddUser("student", "123", UserRole.Student);
+            List<TestResult> results = new List<TestResult>();
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM TestResults WHERE UserId=@UserId ORDER BY Timestamp DESC";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            TestResult tr = new TestResult(
+                                reader.GetInt32(2),
+                                reader.GetInt32(1),
+                                reader.GetInt32(4)
+                            );
+                            tr.Score = reader.GetInt32(3);
+                            tr.Timestamp = reader.GetDateTime(5);
+                            results.Add(tr);
+                        }
+                    }
+                }
+            }
+            return results;
+        }
+
+        public void SaveTestResult(TestResult result)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = @"
+                    INSERT INTO TestResults (UserId, TestId, Score, MaxScore, Timestamp)
+                    VALUES (@UserId, @TestId, @Score, @MaxScore, @Timestamp)
+                ";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", result.UserId);
+                    cmd.Parameters.AddWithValue("@TestId", result.TestId);
+                    cmd.Parameters.AddWithValue("@Score", result.Score);
+                    cmd.Parameters.AddWithValue("@MaxScore", result.MaxScore);
+                    cmd.Parameters.AddWithValue("@Timestamp", result.Timestamp);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private string GetHash(string password)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] bytes = System.Text.Encoding.ASCII.GetBytes(password);
+                byte[] hash = md5.ComputeHash(bytes);
+
+                string result = "";
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    result += hash[i].ToString("x2");
+                }
+                return result;
+            }
         }
     }
 }
-    
-

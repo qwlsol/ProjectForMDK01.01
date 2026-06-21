@@ -128,13 +128,8 @@
             this.numVariants.Size = new System.Drawing.Size(60, 20);
             this.numVariants.TabIndex = 7;
             this.numVariants.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // btnLoad
-            // 
+            2,0,0,0});
+            
             this.btnLoad.Location = new System.Drawing.Point(12, 45);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(100, 30);
@@ -142,9 +137,7 @@
             this.btnLoad.Text = "Загрузить";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // btnGenerateVariants
-            // 
+            
             this.btnGenerateVariants.Location = new System.Drawing.Point(118, 45);
             this.btnGenerateVariants.Name = "btnGenerateVariants";
             this.btnGenerateVariants.Size = new System.Drawing.Size(100, 30);
@@ -152,9 +145,7 @@
             this.btnGenerateVariants.Text = "Варианты";
             this.btnGenerateVariants.UseVisualStyleBackColor = true;
             this.btnGenerateVariants.Click += new System.EventHandler(this.btnGenerateVariants_Click);
-            // 
-            // btnSaveWord
-            // 
+             
             this.btnSaveWord.Location = new System.Drawing.Point(224, 45);
             this.btnSaveWord.Name = "btnSaveWord";
             this.btnSaveWord.Size = new System.Drawing.Size(100, 30);
@@ -162,9 +153,7 @@
             this.btnSaveWord.Text = "Сохранить";
             this.btnSaveWord.UseVisualStyleBackColor = true;
             this.btnSaveWord.Click += new System.EventHandler(this.btnSaveWord_Click);
-            // 
-            // btnEditQuestion
-            // 
+            
             this.btnEditQuestion.Location = new System.Drawing.Point(330, 45);
             this.btnEditQuestion.Name = "btnEditQuestion";
             this.btnEditQuestion.Size = new System.Drawing.Size(100, 30);
@@ -172,9 +161,7 @@
             this.btnEditQuestion.Text = "Ред.";
             this.btnEditQuestion.UseVisualStyleBackColor = true;
             this.btnEditQuestion.Click += new System.EventHandler(this.btnEditQuestion_Click);
-            // 
-            // btnExit
-            // 
+            
             this.btnExit.Location = new System.Drawing.Point(594, 45);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(80, 30);
@@ -182,9 +169,7 @@
             this.btnExit.Text = "Выход";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // listBoxQuestions
-            // 
+            
             this.listBoxQuestions.Font = new System.Drawing.Font("Courier New", 9F);
             this.listBoxQuestions.ItemHeight = 15;
             this.listBoxQuestions.Location = new System.Drawing.Point(12, 85);
@@ -199,9 +184,7 @@
             this.lblStatus.Size = new System.Drawing.Size(660, 30);
             this.lblStatus.TabIndex = 14;
             this.lblStatus.Text = "Режим: Преподаватель";
-            // 
-            // TeacherForm
-            // 
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 480);
