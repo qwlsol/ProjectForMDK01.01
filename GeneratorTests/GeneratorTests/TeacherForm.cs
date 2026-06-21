@@ -13,12 +13,15 @@ namespace GeneratorTests
     public partial class TeacherForm : Form
     {
         private DatabaseManager _db;
-        private TestGenerator _generator;
-        private WordExporter _exporter;
+        private TestGenerator _generator = new TestGenerator();
+        private WordExporter _exporter = new WordExporter();
         private Test _currentTest;
-        public TeacherForm()
+        public TeacherForm(DatabaseManager db)
         {
             InitializeComponent();
+    ;
+
         }
+
     }
 }
