@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace GeneratorTests
 {
-    public partial class LoginForm : Form
+    public partial class TeacherForm : Form
     {
-        private DatabaseManager _db;
-        private int _attempts = 0;
-        private DateTime _blockedUntil = DateTime.MinValue;
-        public LoginForm()
+        public TeacherForm()
         {
             InitializeComponent();
-
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-
-
         }
     }
 }
