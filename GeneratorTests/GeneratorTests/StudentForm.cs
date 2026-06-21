@@ -28,5 +28,11 @@ namespace GeneratorTests
         {
             lblStatus.Text = $"Студент. Пройдено: {_user.TestResults.Count}";
         }
+        private string GetTypeName(QuestionType type)
+        {
+            if (type == QuestionType.Single) return "одиночный";
+            if (type == QuestionType.Multiple) return "множественный";
+            return "текстовый";
+        }
     }
 }
