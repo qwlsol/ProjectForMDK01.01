@@ -34,5 +34,34 @@ namespace GeneratorTests
             if (type == QuestionType.Multiple) return "множественный";
             return "текстовый";
         }
+        private void ShowQuestion()
+        {
+            Question q = _currentTest.Questions[_currentIndex];
+            listBoxQuestions.Items.Clear();
+            listBoxQuestions.Items.Add($"Вопрос {_currentIndex + 1} из {_currentTest.Questions.Count}");
+            listBoxQuestions.Items.Add("");
+            listBoxQuestions.Items.Add(q.Text);
+            listBoxQuestions.Items.Add("");
+            listBoxQuestions.Items.Add($"Тип: {GetTypeName(q.Type)}");
+            listBoxQuestions.Items.Add($"Сложность: {q.Difficulty}");
+
+            if (q.Type == QuestionType.Single || q.Type == QuestionType.Multiple)
+            {
+                listBoxQuestions.Items.Add("");
+                listBoxQuestions.Items.Add("Варианты:");
+                for (int j = 0; j < q.Options.Count; j++)
+                    listBoxQuestions.Items.Add($"   {(char)(65 + j)}) {q.Options[j]}");
+                listBoxQuestions.Items.Add("");
+                listBoxQuestions.Items.Add(q.Type == QuestionType.Single ? "Введите букву (a, b, c...)" : "Введите буквы (a,b,c...)");
+            }
+            else
+            {
+                listBoxQuestions.Items.Add("");
+                listBoxQuestions.Items.Add("Введите ответ:");
+            }
+
+            txtAnswer.Text = "";
+            txtAnswer.Focus();
+        }
     }
 }
