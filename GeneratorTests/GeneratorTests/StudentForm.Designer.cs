@@ -67,6 +67,7 @@
             this.btnFinishTest.TabIndex = 11;
             this.btnFinishTest.Text = "Завершить";
             this.btnFinishTest.UseVisualStyleBackColor = true;
+            this.btnFinishTest.Click += new System.EventHandler(this.btnFinishTest_Click);
             // 
             // btnSubmitAnswer
             // 

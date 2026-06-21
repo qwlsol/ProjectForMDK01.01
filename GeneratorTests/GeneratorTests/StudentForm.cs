@@ -148,5 +148,45 @@ namespace GeneratorTests
                 btnSubmitAnswer.Enabled = false;
             }
         }
+
+        private void btnFinishTest_Click(object sender, EventArgs e)
+        {
+            if (_currentResult == null)
+            {
+                MessageBox.Show("Нет активного теста");
+                return;
+            }
+
+            _currentResult.CalculateScore(_currentTest);
+            _user.AddTestResult(_currentResult);
+            _db.SaveTestResult(_currentResult);
+
+            MessageBox.Show($"Тест завершён!\nРезультат: {_currentResult.Score} из {_currentResult.MaxScore} ({_currentResult.Score * 100 / _currentResult.MaxScore}%)");
+
+            btnStartTest.Enabled = true;
+            btnSubmitAnswer.Enabled = false;
+            btnFinishTest.Enabled = false;
+            txtAnswer.Enabled = false;
+            lableInput.Enabled = false;
+
+            listBoxQuestions.Items.Clear();
+
+            string resultsText = "МОИ РЕЗУЛЬТАТЫ\n\n";
+            for (int i = 0; i < _user.TestResults.Count; i++)
+            {
+                TestResult tr = _user.TestResults[i];
+                resultsText += $"{i + 1}. Тест от {tr.Timestamp.ToShortDateString()}\n";
+                resultsText += $"   Баллы: {tr.Score} / {tr.MaxScore}\n\n";
+            }
+            resultsText += $"Средний балл: {_user.GetAverageScore():F1}";
+
+            listBoxQuestions.Items.Add(resultsText);
+
+            _currentResult = null;
+            _currentIndex = 0;
+            txtAnswer.Text = "";
+            UpdateStatus();
+        
+        }
     }
 }
