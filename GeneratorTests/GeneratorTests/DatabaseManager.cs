@@ -126,6 +126,19 @@ namespace GeneratorTests
                 }
             }
         }
+        public void DeleteQuestion(int id)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "DELETE FROM Questions WHERE Id=@Id";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }
