@@ -39,5 +39,33 @@ namespace GeneratorTests
             if (type == QuestionType.Multiple) return "множественный";
             return "текстовый";
         }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Текстовые файлы|*.txt";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                QuestionLoader loader = new QuestionLoader();
+                LoadingResult result = loader.LoadFromFile(ofd.FileName);
+
+                if (result.Errors.Count > 0)
+                    new ErrorReportForm(result.Errors).ShowDialog();
+
+                if (result.LoadedQuestions.Count > 0)
+                {
+                    foreach (Question q in result.LoadedQuestions)
+                        _db.SaveQuestion(q);
+
+                    LoadQuestions();
+                    MessageBox.Show($"Загружено: {result.LoadedQuestions.Count}, Пропущено: {result.SkippedCount}");
+                }
+                else
+                {
+                    MessageBox.Show("Не загружено ни одного вопроса");
+                }
+            }   
+        }
     }
 }
