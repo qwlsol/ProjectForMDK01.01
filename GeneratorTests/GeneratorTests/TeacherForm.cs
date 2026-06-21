@@ -12,6 +12,7 @@ namespace GeneratorTests
 {
     public partial class TeacherForm : Form
     {
+        
         public TeacherForm()
         {
             InitializeComponent();
