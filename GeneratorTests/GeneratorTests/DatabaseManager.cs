@@ -196,6 +196,48 @@ namespace GeneratorTests
                 }
             }
         }
+        public bool ValidateUser(string login, string password, out UserRole role)
+        {
+            role = UserRole.Student;
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT Role, PasswordHash FROM Users WHERE Login=@Login";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Login", login);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string hash = reader.GetString(1);
+                            if (hash == GetHash(password))
+                            {
+                                role = (UserRole)reader.GetInt32(0);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void AddUser(string login, string password, UserRole role)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "INSERT INTO Users (Login, PasswordHash, Role) VALUES (@Login, @Password, @Role)";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Login", login);
+                    cmd.Parameters.AddWithValue("@Password", GetHash(password));
+                    cmd.Parameters.AddWithValue("@Role", (int)role);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
     
