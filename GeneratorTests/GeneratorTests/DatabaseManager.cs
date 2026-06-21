@@ -48,5 +48,36 @@ namespace GeneratorTests
                 }
             }
         }
+        public List<Question> LoadQuestions()
+        {
+            List<Question> questions = new List<Question>();
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM Questions ORDER BY Id";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string optionsStr = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                        List<string> options = new List<string>();
+                        if (!string.IsNullOrEmpty(optionsStr))
+                            options.AddRange(optionsStr.Split('|'));
+
+                        questions.Add(new Question(
+                            reader.GetInt32(0),
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            reader.GetString(4),
+                            options,
+                            (QuestionType)reader.GetInt32(6)
+                        ));
+                    }
+                }
+            }
+            return questions;
+        }
     }
 }
