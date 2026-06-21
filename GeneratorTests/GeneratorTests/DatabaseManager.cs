@@ -139,6 +139,16 @@ namespace GeneratorTests
                 }
             }
         }
-
+        private string GetHash(string password)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] bytes = System.Text.Encoding.ASCII.GetBytes(password);
+                byte[] hash = md5.ComputeHash(bytes);
+                return Convert.ToHexString(hash);
+            }
+        }
+    }
+}
     }
 }
