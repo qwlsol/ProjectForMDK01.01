@@ -24,5 +24,9 @@ namespace GeneratorTests
             _user = new User(2, "student", "", UserRole.Student);
             _user.TestResults = _db.GetUserResults(2);
         }
+        private void UpdateStatus()
+        {
+            lblStatus.Text = $"Студент. Пройдено: {_user.TestResults.Count}";
+        }
     }
 }
