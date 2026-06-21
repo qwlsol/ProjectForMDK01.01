@@ -19,9 +19,19 @@ namespace GeneratorTests
         public TeacherForm(DatabaseManager db)
         {
             InitializeComponent();
-    ;
+            _db = db;
 
         }
+        private void LoadQuestions()
+        {
+            var questions = _db.LoadQuestions();
+            _generator.SetQuestions(questions);
 
+            cmbTopics.Items.Clear();
+            foreach (string topic in _generator.GetTopics())
+                cmbTopics.Items.Add(topic);
+            if (cmbTopics.Items.Count > 0)
+                cmbTopics.SelectedIndex = 0;
+        }
     }
 }
