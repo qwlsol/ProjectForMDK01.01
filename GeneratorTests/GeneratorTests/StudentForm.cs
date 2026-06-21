@@ -17,9 +17,12 @@ namespace GeneratorTests
         private Test _currentTest;
         private TestResult _currentResult;
         private int _currentIndex = 0;
-        public StudentForm()
+        public StudentForm(DatabaseManager db)
         {
             InitializeComponent();
+            _db = db;
+            _user = new User(2, "student", "", UserRole.Student);
+            _user.TestResults = _db.GetUserResults(2);
         }
     }
 }
