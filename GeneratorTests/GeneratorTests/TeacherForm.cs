@@ -12,7 +12,10 @@ namespace GeneratorTests
 {
     public partial class TeacherForm : Form
     {
-        
+        private DatabaseManager _db;
+        private TestGenerator _generator;
+        private WordExporter _exporter;
+        private Test _currentTest;
         public TeacherForm()
         {
             InitializeComponent();
