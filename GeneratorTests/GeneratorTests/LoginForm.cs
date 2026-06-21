@@ -12,7 +12,9 @@ namespace GeneratorTests
 {
     public partial class LoginForm : Form
     {
-
+        private DatabaseManager _db;
+        private int _attempts = 0;
+        private DateTime _blockedUntil = DateTime.MinValue;
         public LoginForm()
         {
             InitializeComponent();
