@@ -150,7 +150,13 @@ namespace GeneratorTests
             {
                 byte[] bytes = System.Text.Encoding.ASCII.GetBytes(password);
                 byte[] hash = md5.ComputeHash(bytes);
-                return Convert.ToHexString(hash);
+
+                string result = "";
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    result += hash[i].ToString("x2");
+                }
+                return result;
             }
         }
         public List<TestResult> GetUserResults(int userId)
