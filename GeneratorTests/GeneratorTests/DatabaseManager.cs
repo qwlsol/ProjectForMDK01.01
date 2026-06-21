@@ -176,6 +176,26 @@ namespace GeneratorTests
             }
             return results;
         }
+        public void SaveTestResult(TestResult result)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = @"
+                    INSERT INTO TestResults (UserId, TestId, Score, MaxScore, Timestamp)
+                    VALUES (@UserId, @TestId, @Score, @MaxScore, @Timestamp)
+                ";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", result.UserId);
+                    cmd.Parameters.AddWithValue("@TestId", result.TestId);
+                    cmd.Parameters.AddWithValue("@Score", result.Score);
+                    cmd.Parameters.AddWithValue("@MaxScore", result.MaxScore);
+                    cmd.Parameters.AddWithValue("@Timestamp", result.Timestamp);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
     
