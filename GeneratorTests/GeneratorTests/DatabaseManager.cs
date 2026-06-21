@@ -148,7 +148,35 @@ namespace GeneratorTests
                 return Convert.ToHexString(hash);
             }
         }
+        public List<TestResult> GetUserResults(int userId)
+        {
+            List<TestResult> results = new List<TestResult>();
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM TestResults WHERE UserId=@UserId ORDER BY Timestamp DESC";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            TestResult tr = new TestResult(
+                                reader.GetInt32(2),
+                                reader.GetInt32(1),
+                                reader.GetInt32(4)
+                            );
+                            tr.Score = reader.GetInt32(3);
+                            tr.Timestamp = reader.GetDateTime(5);
+                            results.Add(tr);
+                        }
+                    }
+                }
+            }
+            return results;
+        }
     }
 }
-    }
-}
+    
+
