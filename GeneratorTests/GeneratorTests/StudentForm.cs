@@ -106,6 +106,47 @@ namespace GeneratorTests
                 MessageBox.Show("Введите ответ");
                 return;
             }
+            string finalAnswer = answer;
+
+            if (q.Type == QuestionType.Single)
+            {
+                if (answer.Length == 1 && answer[0] >= 'a' && answer[0] <= 'z')
+                {
+                    int idx = answer[0] - 'a';
+                    if (idx < q.Options.Count)
+                        finalAnswer = q.Options[idx];
+                }
+            }
+            else if (q.Type == QuestionType.Multiple)
+            {
+                string[] parts = answer.Split(',');
+                string result = "";
+                foreach (string part in parts)
+                {
+                    string l = part.Trim();
+                    if (l.Length == 1 && l[0] >= 'a' && l[0] <= 'z')
+                    {
+                        int idx = l[0] - 'a';
+                        if (idx < q.Options.Count)
+                        {
+                            if (result != "") result += ",";
+                            result += q.Options[idx];
+                        }
+                    }
+                }
+                finalAnswer = result;
+            }
+
+            _currentResult.SetAnswer(q.Id, finalAnswer);
+            _currentIndex++;
+
+            if (_currentIndex < _currentTest.Questions.Count)
+                ShowQuestion();
+            else
+            {
+                MessageBox.Show("Все вопросы пройдены! Нажмите 'Завершить'");
+                btnSubmitAnswer.Enabled = false;
+            }
         }
     }
 }
