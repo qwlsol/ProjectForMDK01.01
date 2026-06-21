@@ -89,5 +89,23 @@ namespace GeneratorTests
 
             ShowQuestion();
         }
+
+        private void btnSubmitAnswer_Click(object sender, EventArgs e)
+        {
+            if (_currentResult == null || _currentIndex >= _currentTest.Questions.Count)
+            {
+                MessageBox.Show("Начните тест");
+                return;
+            }
+
+            Question q = _currentTest.Questions[_currentIndex];
+            string answer = txtAnswer.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(answer))
+            {
+                MessageBox.Show("Введите ответ");
+                return;
+            }
+        }
     }
 }

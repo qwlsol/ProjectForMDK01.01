@@ -77,6 +77,7 @@
             this.btnSubmitAnswer.TabIndex = 10;
             this.btnSubmitAnswer.Text = "Ответить";
             this.btnSubmitAnswer.UseVisualStyleBackColor = true;
+            this.btnSubmitAnswer.Click += new System.EventHandler(this.btnSubmitAnswer_Click);
             // 
             // btnStartTest
             // 
