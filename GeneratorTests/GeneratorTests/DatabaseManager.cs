@@ -79,5 +79,29 @@ namespace GeneratorTests
             }
             return questions;
         }
+        public void SaveQuestion(Question q)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string optionsStr = q.Options != null ? string.Join("|", q.Options) : "";
+                string sql = @"
+                    INSERT INTO Questions (Text, Topic, Difficulty, CorrectAnswer, Options, Type)
+                    VALUES (@Text, @Topic, @Difficulty, @CorrectAnswer, @Options, @Type)
+                    RETURNING Id;
+                ";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Text", q.Text);
+                    cmd.Parameters.AddWithValue("@Topic", q.Topic);
+                    cmd.Parameters.AddWithValue("@Difficulty", q.Difficulty);
+                    cmd.Parameters.AddWithValue("@CorrectAnswer", q.CorrectAnswer ?? "");
+                    cmd.Parameters.AddWithValue("@Options", optionsStr);
+                    cmd.Parameters.AddWithValue("@Type", (int)q.Type);
+                    q.Id = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
     }
 }
