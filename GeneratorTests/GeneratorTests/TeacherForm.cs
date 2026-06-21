@@ -33,5 +33,11 @@ namespace GeneratorTests
             if (cmbTopics.Items.Count > 0)
                 cmbTopics.SelectedIndex = 0;
         }
+        private string GetTypeName(QuestionType type)
+        {
+            if (type == QuestionType.Single) return "одиночный";
+            if (type == QuestionType.Multiple) return "множественный";
+            return "текстовый";
+        }
     }
 }
