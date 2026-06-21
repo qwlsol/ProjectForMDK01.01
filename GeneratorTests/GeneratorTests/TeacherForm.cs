@@ -105,5 +105,25 @@ namespace GeneratorTests
                 MessageBox.Show($"Создано {tests.Count} вариантов");
             }
         }
+
+        private void btnSaveWord_Click(object sender, EventArgs e)
+        {
+            if(_currentTest == null)
+            {
+                MessageBox.Show("Сначала создайте тест");
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Word документы|*.docx";
+            sfd.FileName = "Тест";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string path = sfd.FileName.Replace(".docx", "");
+                _exporter.SaveVariantsToWord(path, new List<Test> { _currentTest });
+            }
+        }
+
     }
 }

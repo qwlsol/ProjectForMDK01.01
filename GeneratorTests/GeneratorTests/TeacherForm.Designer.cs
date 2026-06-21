@@ -161,6 +161,7 @@
             this.btnSaveWord.TabIndex = 10;
             this.btnSaveWord.Text = "Сохранить";
             this.btnSaveWord.UseVisualStyleBackColor = true;
+            this.btnSaveWord.Click += new System.EventHandler(this.btnSaveWord_Click);
             // 
             // btnEditQuestion
             // 
