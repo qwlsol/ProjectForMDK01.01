@@ -86,6 +86,7 @@
             this.btnStartTest.TabIndex = 9;
             this.btnStartTest.Text = "Начать тест";
             this.btnStartTest.UseVisualStyleBackColor = true;
+            this.btnStartTest.Click += new System.EventHandler(this.btnStartTest_Click);
             // 
             // lableInput
             // 

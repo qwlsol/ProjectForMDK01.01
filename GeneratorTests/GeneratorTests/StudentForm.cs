@@ -63,5 +63,31 @@ namespace GeneratorTests
             txtAnswer.Text = "";
             txtAnswer.Focus();
         }
+
+        private void btnStartTest_Click(object sender, EventArgs e)
+        {
+            var questions = _db.LoadQuestions();
+            if (questions.Count == 0)
+            {
+                MessageBox.Show("Нет вопросов");
+                return;
+            }
+
+            var list = new List<Question>();
+            for (int i = 0; i < Math.Min(5, questions.Count); i++)
+                list.Add(questions[i]);
+
+            _currentTest = new Test(1, "Тест", list);
+            _currentResult = new TestResult(_currentTest.Id, _user.Id, _currentTest.Questions.Count);
+            _currentIndex = 0;
+
+            btnStartTest.Enabled = false;
+            btnSubmitAnswer.Enabled = true;
+            btnFinishTest.Enabled = true;
+            txtAnswer.Enabled = true;
+            lableInput.Enabled = true;
+
+            ShowQuestion();
+        }
     }
 }
