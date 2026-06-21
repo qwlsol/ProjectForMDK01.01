@@ -102,6 +102,30 @@ namespace GeneratorTests
                 }
             }
         }
+        public void UpdateQuestion(Question q)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                string optionsStr = q.Options != null ? string.Join("|", q.Options) : "";
+                string sql = @"
+                    UPDATE Questions SET Text=@Text, Topic=@Topic, Difficulty=@Difficulty,
+                        CorrectAnswer=@CorrectAnswer, Options=@Options, Type=@Type
+                    WHERE Id=@Id
+                ";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", q.Id);
+                    cmd.Parameters.AddWithValue("@Text", q.Text);
+                    cmd.Parameters.AddWithValue("@Topic", q.Topic);
+                    cmd.Parameters.AddWithValue("@Difficulty", q.Difficulty);
+                    cmd.Parameters.AddWithValue("@CorrectAnswer", q.CorrectAnswer ?? "");
+                    cmd.Parameters.AddWithValue("@Options", optionsStr);
+                    cmd.Parameters.AddWithValue("@Type", (int)q.Type);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }
