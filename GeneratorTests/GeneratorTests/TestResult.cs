@@ -109,5 +109,5 @@ namespace GeneratorTests
             return result;
         }
     }
-}  
+}
 
