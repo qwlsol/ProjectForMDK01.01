@@ -27,7 +27,7 @@ namespace GeneratorTests
         }
         private void UpdateStatus()
         {
-            lblStatus.Text = $"Студент. Пройдено: {_user.TestResults.Count}";
+            lblStatus.Text = $"Студент: {_user.Login}. Пройдено: {_user.TestResults.Count}";
         }
         private string GetTypeName(QuestionType type)
         {
