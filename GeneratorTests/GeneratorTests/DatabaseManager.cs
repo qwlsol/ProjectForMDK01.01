@@ -55,9 +55,9 @@ namespace GeneratorTests
 
         private void CreateDefaultUsers()
         {
-            if (!ValidateUser("teacher", "123", out _))
+            if (!ValidateUser("teacher", "123", out _, out _))
                 AddUser("teacher", "123", UserRole.Teacher);
-            if (!ValidateUser("student", "123", out _))
+            if (!ValidateUser("student", "123", out _, out _))
                 AddUser("student", "123", UserRole.Student);
         }
 
@@ -156,13 +156,14 @@ namespace GeneratorTests
             }
         }
 
-        public bool ValidateUser(string login, string password, out UserRole role)
+        public bool ValidateUser(string login, string password, out UserRole role, out int userId)
         {
             role = UserRole.Student;
+            userId = -1;
             using (NpgsqlConnection conn = new NpgsqlConnection(_connectionString))
             {
                 conn.Open();
-                string sql = "SELECT Role, PasswordHash FROM Users WHERE Login=@Login";
+                string sql = "SELECT Id, Role, PasswordHash FROM Users WHERE Login=@Login";
                 using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Login", login);
@@ -170,10 +171,11 @@ namespace GeneratorTests
                     {
                         if (reader.Read())
                         {
-                            string hash = reader.GetString(1);
+                            string hash = reader.GetString(2);
                             if (hash == GetHash(password))
                             {
-                                role = (UserRole)reader.GetInt32(0);
+                                userId = reader.GetInt32(0);
+                                role = (UserRole)reader.GetInt32(1);
                                 return true;
                             }
                         }

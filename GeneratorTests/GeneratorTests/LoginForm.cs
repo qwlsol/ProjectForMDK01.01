@@ -41,15 +41,18 @@ namespace GeneratorTests
                 return;
             }
 
-            if (_db.ValidateUser(login, password, out UserRole role))
+            if (_db.ValidateUser(login, password, out UserRole role, out int userId))
             {
                 _attempts = 0;
                 this.Hide();
 
+                User user = new User(userId, login, "", role);
+                user.TestResults = _db.GetUserResults(userId);
+
                 if (role == UserRole.Teacher)
-                    new TeacherForm(_db).ShowDialog();
+                    new TeacherForm(_db, user).ShowDialog();
                 else
-                    new StudentForm(_db).ShowDialog();
+                    new StudentForm(_db, user).ShowDialog();
 
                 this.Show();
                 txtPassword.Text = "";

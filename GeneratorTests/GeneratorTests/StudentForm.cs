@@ -15,14 +15,15 @@ namespace GeneratorTests
         private DatabaseManager _db;
         private User _user;
         private Test _currentTest;
-        private TestResult _currentResult;
-        private int _currentIndex = 0;
-        public StudentForm(DatabaseManager db)
+        private TestResult _activeResult;
+        private int _currentQuestionIndex;
+        public StudentForm(DatabaseManager db, User user)
         {
             InitializeComponent();
             _db = db;
-            _user = new User(2, "student", "", UserRole.Student);
-            _user.TestResults = _db.GetUserResults(2);
+            _user = user;
+            _user.TestResults = _db.GetUserResults(user.Id);
+            UpdateStatus();
         }
         private void UpdateStatus()
         {
@@ -36,9 +37,9 @@ namespace GeneratorTests
         }
         private void ShowQuestion()
         {
-            Question q = _currentTest.Questions[_currentIndex];
+            Question q = _currentTest.Questions[_currentQuestionIndex];
             listBoxQuestions.Items.Clear();
-            listBoxQuestions.Items.Add($"Вопрос {_currentIndex + 1} из {_currentTest.Questions.Count}");
+            listBoxQuestions.Items.Add($"Вопрос {_currentQuestionIndex + 1} из {_currentTest.Questions.Count}");
             listBoxQuestions.Items.Add("");
             listBoxQuestions.Items.Add(q.Text);
             listBoxQuestions.Items.Add("");
@@ -78,8 +79,8 @@ namespace GeneratorTests
                 list.Add(questions[i]);
 
             _currentTest = new Test(1, "Тест", list);
-            _currentResult = new TestResult(_currentTest.Id, _user.Id, _currentTest.Questions.Count);
-            _currentIndex = 0;
+            _activeResult = new TestResult(_currentTest.Id, _user.Id, _currentTest.Questions.Count);
+            _currentQuestionIndex = 0;
 
             btnStartTest.Enabled = false;
             btnSubmitAnswer.Enabled = true;
@@ -92,13 +93,13 @@ namespace GeneratorTests
 
         private void btnSubmitAnswer_Click(object sender, EventArgs e)
         {
-            if (_currentResult == null || _currentIndex >= _currentTest.Questions.Count)
+            if (_activeResult == null || _currentQuestionIndex >= _currentTest.Questions.Count)
             {
                 MessageBox.Show("Начните тест");
                 return;
             }
 
-            Question q = _currentTest.Questions[_currentIndex];
+            Question q = _currentTest.Questions[_currentQuestionIndex];
             string answer = txtAnswer.Text.Trim().ToLower();
 
             if (string.IsNullOrEmpty(answer))
@@ -137,10 +138,10 @@ namespace GeneratorTests
                 finalAnswer = result;
             }
 
-            _currentResult.SetAnswer(q.Id, finalAnswer);
-            _currentIndex++;
+            _activeResult.SetAnswer(q.Id, finalAnswer);
+            _currentQuestionIndex++;
 
-            if (_currentIndex < _currentTest.Questions.Count)
+            if (_currentQuestionIndex < _currentTest.Questions.Count)
                 ShowQuestion();
             else
             {
@@ -151,17 +152,17 @@ namespace GeneratorTests
 
         private void btnFinishTest_Click(object sender, EventArgs e)
         {
-            if (_currentResult == null)
+            if (_activeResult == null)
             {
                 MessageBox.Show("Нет активного теста");
                 return;
             }
 
-            _currentResult.CalculateScore(_currentTest);
-            _user.AddTestResult(_currentResult);
-            _db.SaveTestResult(_currentResult);
+            _activeResult.CalculateScore(_currentTest);
+            _user.AddTestResult(_activeResult);
+            _db.SaveTestResult(_activeResult);
 
-            MessageBox.Show($"Тест завершён!\nРезультат: {_currentResult.Score} из {_currentResult.MaxScore} ({_currentResult.Score * 100 / _currentResult.MaxScore}%)");
+            MessageBox.Show($"Тест завершён!\nРезультат: {_activeResult.Score} из {_activeResult.MaxScore} ({_activeResult.Score * 100 / _activeResult.MaxScore}%)");
 
             btnStartTest.Enabled = true;
             btnSubmitAnswer.Enabled = false;
@@ -182,8 +183,8 @@ namespace GeneratorTests
 
             listBoxQuestions.Items.Add(resultsText);
 
-            _currentResult = null;
-            _currentIndex = 0;
+            _activeResult = null;
+            _currentQuestionIndex = 0;
             txtAnswer.Text = "";
             UpdateStatus();
         

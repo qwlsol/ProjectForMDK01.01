@@ -31,53 +31,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.numQuestions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVariants)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblTopic
-            // 
+            
             this.lblTopic.AutoSize = true;
             this.lblTopic.Location = new System.Drawing.Point(12, 15);
             this.lblTopic.Name = "lblTopic";
             this.lblTopic.Size = new System.Drawing.Size(37, 13);
             this.lblTopic.TabIndex = 0;
             this.lblTopic.Text = "Тема:";
-            // 
-            // lblDifficulty
-            // 
+             
             this.lblDifficulty.AutoSize = true;
             this.lblDifficulty.Location = new System.Drawing.Point(212, 15);
             this.lblDifficulty.Name = "lblDifficulty";
             this.lblDifficulty.Size = new System.Drawing.Size(66, 13);
             this.lblDifficulty.TabIndex = 1;
             this.lblDifficulty.Text = "Сложность:";
-            // 
-            // lblQuestions
-            // 
+            
             this.lblQuestions.AutoSize = true;
             this.lblQuestions.Location = new System.Drawing.Point(382, 15);
             this.lblQuestions.Name = "lblQuestions";
             this.lblQuestions.Size = new System.Drawing.Size(59, 13);
             this.lblQuestions.TabIndex = 2;
             this.lblQuestions.Text = "Вопросов:";
-            // 
-            // lblVariants
-            // 
+            
             this.lblVariants.AutoSize = true;
             this.lblVariants.Location = new System.Drawing.Point(532, 15);
             this.lblVariants.Name = "lblVariants";
             this.lblVariants.Size = new System.Drawing.Size(64, 13);
             this.lblVariants.TabIndex = 3;
             this.lblVariants.Text = "Вариантов:";
-            // 
-            // cmbTopics
-            // 
+           
             this.cmbTopics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTopics.Location = new System.Drawing.Point(72, 12);
             this.cmbTopics.Name = "cmbTopics";
             this.cmbTopics.Size = new System.Drawing.Size(120, 21);
             this.cmbTopics.TabIndex = 4;
-            // 
-            // cmbDifficulty
-            // 
+             
             this.cmbDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDifficulty.Items.AddRange(new object[] {
             "Все",
@@ -88,9 +76,7 @@
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(80, 21);
             this.cmbDifficulty.TabIndex = 5;
-            // 
-            // numQuestions
-            // 
+            
             this.numQuestions.Location = new System.Drawing.Point(452, 12);
             this.numQuestions.Maximum = new decimal(new int[] {
             30,
@@ -110,9 +96,7 @@
             0,
             0,
             0});
-            // 
-            // numVariants
-            // 
+            
             this.numVariants.Location = new System.Drawing.Point(602, 12);
             this.numVariants.Maximum = new decimal(new int[] {
             10,
@@ -176,9 +160,7 @@
             this.listBoxQuestions.Name = "listBoxQuestions";
             this.listBoxQuestions.Size = new System.Drawing.Size(660, 349);
             this.listBoxQuestions.TabIndex = 13;
-            // 
-            // lblStatus
-            // 
+            
             this.lblStatus.Location = new System.Drawing.Point(12, 440);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(660, 30);

@@ -16,10 +16,13 @@ namespace GeneratorTests
         private TestGenerator _generator = new TestGenerator();
         private WordExporter _exporter = new WordExporter();
         private Test _currentTest;
-        public TeacherForm(DatabaseManager db)
+        private User _currentUser;
+        public TeacherForm(DatabaseManager db, User user)
         {
             InitializeComponent();
             _db = db;
+            _currentUser = user;
+            LoadQuestions();
 
         }
         private void LoadQuestions()
